@@ -130,10 +130,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Content.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Content.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="platform.h" />
   </ItemGroup>

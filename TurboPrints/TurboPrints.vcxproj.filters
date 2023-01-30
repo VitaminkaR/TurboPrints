@@ -21,12 +21,24 @@
     <ClCompile Include="DrawableObject.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Content.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="DrawableObject.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Content.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
