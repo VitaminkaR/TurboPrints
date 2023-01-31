@@ -1,4 +1,5 @@
 #include "DrawableObject.h"
+#include "Content.h"
 
 DrawableObject::DrawableObject()
 {
@@ -36,8 +37,7 @@ void DrawableObject::Draw()
 {
 	if (texture != NULL) 
 	{
-		SDL_Rect info; info.x = position.x; info.y = position.y, info.w = tsize.x, info.h = tsize.y;
-		SDL_RenderCopy(renderer, texture, &info, NULL);
+		render_texture(texture, renderer, position.x, position.y, tsize.x, tsize.y);
 	}
 }
 

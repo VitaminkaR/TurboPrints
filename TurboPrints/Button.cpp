@@ -1,10 +1,13 @@
 #include "Button.h"
 
-Button::Button(Vector2 _position, SDL_Renderer& _renderer, SDL_Texture& _texture, void(*action)(Vector2 mpos, int button_type, int clicks))
+Button::Button(Vector2 _position, SDL_Renderer& _renderer, SDL_Texture *_texture, void(*action)(Vector2 mpos, int button_type, int clicks))
 {
 	position = _position;
 	renderer = &_renderer;
-	texture = &_texture;
+	texture = _texture;
+	int w, h;
+	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
+	tsize.x = w; tsize.y = h;
 	this->action = action;
 }
 

@@ -68,8 +68,10 @@ bool init()
 
 	objects = new std::vector<DrawableObject*>();
 
+	IMG_Init(IMG_INIT_PNG);
+
 	//Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO) && IMG_Init(IMG_INIT_PNG) < 0)
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 		success = false;
@@ -120,6 +122,6 @@ void DebugAction(Vector2 mpos, int button_type, int clicks)
 void create_scene()
 {
 	Vector2 pos; pos.x = 0; pos.y = 0;
-	Button *b = new Button(pos, *gRenderer, 32, 32, DebugAction);
+	Button *b = new Button(pos, *gRenderer, textures->at(0), DebugAction);
 	objects->push_back(b);
 }
