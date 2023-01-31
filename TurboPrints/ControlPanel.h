@@ -4,13 +4,17 @@
 extern const int WIDTH;
 extern const int HEIGHT;
 extern SDL_Renderer* gRenderer;
+extern std::vector<SDL_Texture*>* textures;
+extern std::vector<DrawableObject*>* objects;
 
 class ControlPanel : public DrawableObject
 {
 public:
 	Button* call_button;
 
-	void Init(std::vector<DrawableObject*>* _objects, std::vector<SDL_Texture*>* _textures);
+	int list_offset;
+
+	void Init();
 	void Call_Button();
 
 	void Show();

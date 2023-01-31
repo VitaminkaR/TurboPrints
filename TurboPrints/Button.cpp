@@ -23,10 +23,7 @@ bool Button::Request(SDL_Event& _event)
 	if (_event.type == SDL_MOUSEBUTTONDOWN)
 	{
 		Vector2 mpos; mpos.x = _event.button.x; mpos.y = _event.button.y;
-		if (position.x < mpos.x && position.y < mpos.y && position.x + tsize.x > mpos.x && position.y + tsize.y > mpos.y)
-		{
-			return true;
-		}
+		return IntersectRectPoint(position.x, position.y, mpos.x, mpos.y, tsize.x, tsize.y);
 	}
 	return false;
 }

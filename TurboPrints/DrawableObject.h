@@ -2,6 +2,8 @@
 
 #include "platform.h"
 
+bool IntersectRectPoint(int x1, int y1, int x2, int y2, int w1, int h1);
+
 class DrawableObject
 {
 public:

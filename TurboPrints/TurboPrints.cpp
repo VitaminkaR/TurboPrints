@@ -13,6 +13,12 @@ std::vector<DrawableObject*>* objects;
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
+// кол-во миллисекунд ожидания межу обновлениями
+// сильно замедляет приложение (заметно только на слабых устр-вах)
+// снимает огромную нагрузку на ядро процессора (цикл без замедления выполняется крайне часто, вызывая кучу отрисовок(и прочего),
+// поэтому насильно замедляем цикл, т к over-*****-fps нам не нужно, достаточно и 30
+// стандарт 5 ms - около 60 fps
+const int FRAMES = 5;
 
 bool init();
 void close();
@@ -41,6 +47,11 @@ int SDL_main(int argc, char* argv[])
 
 			for (int i = 0; i < objects->size(); i++)
 			{
+				if (objects->at(i) == nullptr) 
+				{
+					objects->erase(objects->begin() + i);
+					continue;
+				}
 				objects->at(i)->Event_Handle(e);
 			}
 		}
@@ -57,6 +68,9 @@ int SDL_main(int argc, char* argv[])
 		
 		//SDL_UpdateWindowSurface(global_vars.gWindow);
 		SDL_RenderPresent(gRenderer);
+
+		SDL_Delay(FRAMES);
+		std::cout << SDL_GetTicks() << std::endl;
 	}
 	close();
 
@@ -119,8 +133,8 @@ void create_scene()
 {
 	objects->push_back(new Menu());
 	Menu *m = (Menu*)objects->at(objects->size() - 1);
-	m->Init(objects, textures);
+	m->Init();
 	objects->push_back(new ControlPanel());
 	ControlPanel* cp = (ControlPanel*)objects->at(objects->size() - 1);
-	cp->Init(objects, textures);
+	cp->Init();
 }
