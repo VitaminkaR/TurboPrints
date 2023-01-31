@@ -7,6 +7,7 @@ void load_content()
 {
 	textures = new std::vector<SDL_Texture*>();
 	textures->push_back(load_image(gRenderer, "./Resource/images/menu_button.png"));
+	textures->push_back(load_image(gRenderer, "./Resource/images/control_panel.png"));
 }
 
 void unload_content()

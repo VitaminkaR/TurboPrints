@@ -1,6 +1,7 @@
 ﻿#include "platform.h"
 #include "Content.h"
-#include "Button.h"
+#include "Menu.h"
+#include "ControlPanel.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -114,14 +115,12 @@ void close()
 	SDL_Quit();
 }
 
-void DebugAction(Vector2 mpos, int button_type, int clicks)
-{
-	std::cout << "click";
-}
-
 void create_scene()
 {
-	Vector2 pos; pos.x = 0; pos.y = 0;
-	Button *b = new Button(pos, *gRenderer, textures->at(0), DebugAction);
-	objects->push_back(b);
+	objects->push_back(new Menu());
+	Menu *m = (Menu*)objects->at(objects->size() - 1);
+	m->Init(objects, textures);
+	objects->push_back(new ControlPanel());
+	ControlPanel* cp = (ControlPanel*)objects->at(objects->size() - 1);
+	cp->Init(objects, textures);
 }

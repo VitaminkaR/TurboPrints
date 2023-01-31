@@ -132,13 +132,17 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Content.cpp" />
+    <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Content.h" />
+    <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="platform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
