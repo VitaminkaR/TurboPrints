@@ -70,7 +70,6 @@ int SDL_main(int argc, char* argv[])
 		SDL_RenderPresent(gRenderer);
 
 		SDL_Delay(FRAMES);
-		std::cout << SDL_GetTicks() << std::endl;
 	}
 	close();
 

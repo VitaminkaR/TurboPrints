@@ -13,6 +13,7 @@ public:
 	Button* call_button;
 
 	int list_offset;
+	bool focus; // если курсор внутри области панели
 
 	void Init();
 	void Call_Button();
