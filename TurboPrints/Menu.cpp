@@ -56,7 +56,8 @@ void Menu::Event_Handle(SDL_Event& e)
 	}
 	if (isShow)
 	{
-		// обработка кнопок
+		if(compile_button->Request(e))
+			compile();
 	}
 }
 

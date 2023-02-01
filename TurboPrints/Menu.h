@@ -1,6 +1,7 @@
 #pragma once
 #include "DrawableObject.h"
 #include "Button.h"
+#include "Compile.h"
 
 extern const int WIDTH;
 extern const int HEIGHT;
