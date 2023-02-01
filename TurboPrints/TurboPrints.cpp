@@ -9,6 +9,7 @@ SDL_Surface* gScreenSurface = NULL;
 SDL_Renderer* gRenderer = NULL;				// основной рендер
 std::vector<SDL_Texture*>* textures;		// хранит загруженные текстуры
 std::vector<DrawableObject*>* objects;		// хранит объекты 
+WindowPanel *wp = NULL;							// управляет окнами(не ОС, а внутрипрограммными)
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
@@ -29,6 +30,7 @@ int SDL_main(int argc, char* argv[])
 		return -1;
 
 	load_content();
+	wp = new WindowPanel();
 	create_scene();
 
 	bool quit = false;
@@ -44,6 +46,8 @@ int SDL_main(int argc, char* argv[])
 				quit = true;
 			}
 
+			wp->Event_Handle(e);
+
 			for (int i = 0; i < objects->size(); i++)
 			{
 				if (objects->at(i) == nullptr) 
@@ -57,6 +61,9 @@ int SDL_main(int argc, char* argv[])
 
 		SDL_SetRenderDrawColor(gRenderer, 100, 100, 100, 0xFF);
 		SDL_RenderClear(gRenderer);
+
+		wp->Draw();
+		wp->Update();
 
 		// обновление и отрисовка объектов
 		for (int i = 0; i < objects->size(); i++)
@@ -116,12 +123,7 @@ void close()
 	delete  textures;
 
 	// выгрузка объектов
-	for (int i = 0; i < objects->size(); i++)
-	{
-		objects->at(i)->Dispose();
-		delete objects->at(i);
-	}
-	delete objects;
+	wp->Dispose();
 
 	// удаление окна
 	SDL_DestroyWindow(gWindow);
@@ -132,10 +134,16 @@ void close()
 
 void create_scene()
 {
+	std::vector<DrawableObject*>** scheme_window = wp->GetScene(0);
+	*scheme_window = new std::vector<DrawableObject*>();
+	objects = *scheme_window;
+
 	// tag = menu
-	objects->push_back(new Menu);
+	(* scheme_window)->push_back(new Menu);
 	// tag = conpan
-	objects->push_back(new ControlPanel());
-	// tag = winpan
-	objects->push_back(new WindowPanel());
+	(*scheme_window)->push_back(new ControlPanel());
+
+
+	std::vector<DrawableObject*>** data_window = wp->GetScene(1);
+	*data_window = new std::vector<DrawableObject*>();
 }

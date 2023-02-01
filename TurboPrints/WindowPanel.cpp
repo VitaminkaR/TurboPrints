@@ -7,24 +7,17 @@ WindowPanel::WindowPanel()
 	position.x = WIDTH / 5 + 32;
 	position.y = 0;
 	Set_Texture(*textures->at(3));
-
-	objects_copy = new std::vector<DrawableObject*>();
 }
 
 void WindowPanel::DataWorktop()
 {
-	if(objects_copy->size() == 0) objects_copy->push_back(Find<DrawableObject>("winpan"));
-	std::vector<DrawableObject*>* temp = objects;
-	objects = objects_copy;
-	objects_copy = temp;
+	objects = windows[1];
 
 	mode = 0;
 }
 void WindowPanel::SchemeWorktop()
 {
-	std::vector<DrawableObject*>* temp = objects;
-	objects = objects_copy;
-	objects_copy = temp;
+	objects = windows[0];
 
 	mode = 1;
 }
@@ -48,10 +41,21 @@ void WindowPanel::Event_Handle(SDL_Event& e)
 
 void WindowPanel::Dispose()
 {
-	for (int i = 0; i < objects_copy->size(); i++)
+	for (int i = 0; i < WINDOW_COUNT; i++)
 	{
-		objects_copy->at(i)->Dispose();
-		delete objects_copy->at(i);
+		if (windows[i] != 0)
+		{
+			for (int j = 0; j < windows[i]->size(); j++)
+			{
+				windows[i]->at(j)->Dispose();
+				delete windows[i]->at(j);
+			}
+			delete windows[i];
+		}
 	}
-	delete objects_copy;
+}
+
+std::vector<DrawableObject*>** WindowPanel::GetScene(int id)
+{
+	return windows+id;
 }
