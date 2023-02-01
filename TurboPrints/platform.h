@@ -5,13 +5,4 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
-struct Vector2f
-{
-	float x, y;
-};
-
-struct Vector2
-{
-	int x, y;
-};
+#include "Utils.h"

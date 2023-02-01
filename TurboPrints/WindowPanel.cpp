@@ -1,14 +1,10 @@
 #include "WindowPanel.h"
-#include "Button.h"
 
 WindowPanel::WindowPanel()
 {
 	position.x = WIDTH / 5 + 32;
 	position.y = 0;
-	texture = textures->at(3);
-	int w, h;
-	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-	tsize.x = w; tsize.y = h;
+	Set_Texture(*textures->at(3));
 }
 
 void WindowPanel::Event_Handle(SDL_Event& e)

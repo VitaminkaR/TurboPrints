@@ -15,7 +15,7 @@ public:
 	Button *call_button;
 	Button *compile_button;
 
-	void Init();
+    Menu();
 	void Call_Button();
 
 	void Show();
@@ -26,4 +26,6 @@ public:
 	bool isShow;
 
 	void Event_Handle(SDL_Event& e);
+
+	void Dispose();
 };

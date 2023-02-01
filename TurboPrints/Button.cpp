@@ -3,10 +3,7 @@
 Button::Button(Vector2 _position, SDL_Texture *_texture)
 {
 	position = _position;
-	texture = _texture;
-	int w, h;
-	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
-	tsize.x = w; tsize.y = h;
+	Set_Texture(*_texture);
 }
 
 Button::Button(Vector2 _position, int w, int h)

@@ -8,13 +8,11 @@ void ControlPanel::Call_Button()
 		Show();
 }
 
-void ControlPanel::Init()
+ControlPanel::ControlPanel()
 {
 	isShow = false;
-	Vector2 pos; pos.x = 0; pos.y = 0;
-	Button* b = new Button(pos, textures->at(1));
-	call_button = b;
-	call_button->position = { WIDTH - 32, 0 };
+	Vector2 pos; pos.x = WIDTH - 32; pos.y = 0;
+	call_button = new Button(pos, textures->at(1));
 }
 
 void ControlPanel::Show()
@@ -73,4 +71,9 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 
 		// отрисовка кнопок инструментов
 	}
+}
+
+void ControlPanel::Dispose()
+{
+	delete call_button;
 }

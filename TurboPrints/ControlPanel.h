@@ -15,7 +15,7 @@ public:
 	int list_offset;
 	bool focus; // если курсор внутри области панели
 
-	void Init();
+	ControlPanel();
 	void Call_Button();
 
 	void Show();
@@ -26,4 +26,6 @@ public:
 	bool isShow;
 
 	void Event_Handle(SDL_Event& e);
+
+	 void Dispose();
 };

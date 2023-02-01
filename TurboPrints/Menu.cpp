@@ -8,12 +8,11 @@ void Menu::Call_Button()
 		Show();
 }
 
-void Menu::Init()
+Menu::Menu()
 {
 	isShow = false;
 	Vector2 pos; pos.x = 0; pos.y = 0;
-	Button* call_b = new Button(pos, textures->at(0));
-	call_button = call_b;
+	call_button = new Button(pos, textures->at(0));
 }
 
 void Menu::Show()
@@ -24,16 +23,13 @@ void Menu::Show()
 	
 	// create buttons
 	Vector2 pos; pos.x = 64; pos.y = HEIGHT - 64;
-	Button* compile_b = new Button(pos, textures->at(2));
-	compile_button = compile_b;
+	compile_button = new Button(pos, textures->at(2));;
 }
 
 void Menu::Close()
 {
 	isShow = false;
-
 	delete compile_button;
-
 	call_button->position = { 0, 0 };
 }
 
@@ -46,6 +42,7 @@ void Menu::Draw()
 		SDL_SetRenderDrawColor(gRenderer, 225, 225, 225, 0xFF);
 		SDL_RenderFillRect(gRenderer, &fillRect);
 
+		// отрисока кнопок
 		compile_button->Draw();
 	}
 }
@@ -58,6 +55,12 @@ void Menu::Event_Handle(SDL_Event& e)
 	}
 	if (isShow)
 	{
-		
+		// обработка кнопок
 	}
+}
+
+void Menu::Dispose()
+{
+	delete call_button;
+	if(compile_button != nullptr) delete compile_button;
 }

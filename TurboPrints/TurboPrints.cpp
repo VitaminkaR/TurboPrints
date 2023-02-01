@@ -4,13 +4,11 @@
 #include "ControlPanel.h"
 #include "WindowPanel.h"
 
-//The window we'll be rendering to
 SDL_Window* gWindow = NULL;
-//The surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
-SDL_Renderer* gRenderer = NULL;
-std::vector<SDL_Texture*>* textures;
-std::vector<DrawableObject*>* objects;
+SDL_Renderer* gRenderer = NULL;				// основной рендер
+std::vector<SDL_Texture*>* textures;		// хранит загруженные текстуры
+std::vector<DrawableObject*>* objects;		// хранит объекты 
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
@@ -21,9 +19,9 @@ const int HEIGHT = 720;
 // стандарт 15 ms - около 60 fps
 const int FRAMES = 15;
 
-bool init();
-void close();
-void create_scene();
+bool init();													// инициализация программы
+void close();													// отчистка данных (это может и ОС делать)
+void create_scene();										// создание основного интерфейса и объектов
 
 int SDL_main(int argc, char* argv[])
 {
@@ -31,12 +29,12 @@ int SDL_main(int argc, char* argv[])
 		return -1;
 
 	load_content();
-
 	create_scene();
 
 	bool quit = false;
 	SDL_Event e;
 
+	// главный цикл
 	while (!quit)
 	{
 		while (SDL_PollEvent(&e) != 0)
@@ -57,19 +55,17 @@ int SDL_main(int argc, char* argv[])
 			}
 		}
 
-		//Clear screen
 		SDL_SetRenderDrawColor(gRenderer, 100, 100, 100, 0xFF);
 		SDL_RenderClear(gRenderer);
 
+		// обновление и отрисовка объектов
 		for (int i = 0; i < objects->size(); i++)
 		{
 			objects->at(i)->Update();
 			objects->at(i)->Draw();
 		}
 		
-		//SDL_UpdateWindowSurface(global_vars.gWindow);
 		SDL_RenderPresent(gRenderer);
-
 		SDL_Delay(FRAMES);
 	}
 	close();
@@ -83,13 +79,12 @@ bool init()
 
 	objects = new std::vector<DrawableObject*>();
 	
+	// инициализация компонентов
 	if (IMG_Init(IMG_INIT_PNG) < 0)
 	{
 		printf("IMG could not initialize! IMG_Error: %s\n", IMG_GetError());
 		success = false;
 	}
-	
-	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -97,7 +92,7 @@ bool init()
 	}
 	else
 	{
-		//Create window
+		// создание окна
 		gWindow = SDL_CreateWindow("TurboPrints", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, SDL_WINDOW_SHOWN);
 		if (gWindow == NULL)
 		{
@@ -106,7 +101,6 @@ bool init()
 		}
 		else
 		{
-			//Get window surface
 			gScreenSurface = SDL_GetWindowSurface(gWindow);
 			gRenderer = SDL_CreateRenderer(gWindow, -1, 0);
 		}
@@ -117,16 +111,19 @@ bool init()
 
 void close()
 {
-	//Deallocate media
+	//выгрузка конента
 	unload_content();
 	delete  textures;
 
+	// выгрузка объектов
 	for (int i = 0; i < objects->size(); i++)
 	{
+		objects->at(i)->Dispose();
 		delete objects->at(i);
 	}
 	delete objects;
 
+	// удаление окна
 	SDL_DestroyWindow(gWindow);
 	gWindow = NULL;
 
@@ -136,10 +133,6 @@ void close()
 void create_scene()
 {
 	objects->push_back(new Menu());
-	Menu *m = (Menu*)objects->at(objects->size() - 1);
-	m->Init();
 	objects->push_back(new ControlPanel());
-	ControlPanel* cp = (ControlPanel*)objects->at(objects->size() - 1);
-	cp->Init();
 	objects->push_back(new WindowPanel());
 }
