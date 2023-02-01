@@ -1,3 +1,5 @@
+#pragma once
+
 #include "DrawableObject.h"
 #include "Button.h"
 

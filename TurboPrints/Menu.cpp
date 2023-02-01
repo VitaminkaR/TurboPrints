@@ -10,6 +10,7 @@ void Menu::Call_Button()
 
 Menu::Menu()
 {
+	tag = "menu";
 	isShow = false;
 	Vector2 pos; pos.x = 0; pos.y = 0;
 	call_button = new Button(pos, textures->at(0));

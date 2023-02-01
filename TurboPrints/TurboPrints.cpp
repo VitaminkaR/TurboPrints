@@ -132,7 +132,10 @@ void close()
 
 void create_scene()
 {
-	objects->push_back(new Menu());
+	// tag = menu
+	objects->push_back(new Menu);
+	// tag = conpan
 	objects->push_back(new ControlPanel());
+	// tag = winpan
 	objects->push_back(new WindowPanel());
 }

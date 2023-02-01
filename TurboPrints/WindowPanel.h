@@ -12,5 +12,14 @@ class WindowPanel : public DrawableObject
 public:
 	WindowPanel();
 
+	std::vector<DrawableObject*>* objects_copy;
+
+	// mode 0 - cheme 1- data
+	int mode = 0;
+	void DataWorktop();
+	void SchemeWorktop();
+
 	void Event_Handle(SDL_Event& e);
+
+	void Dispose();
 };

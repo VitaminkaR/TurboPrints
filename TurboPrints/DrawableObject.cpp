@@ -1,6 +1,15 @@
 #include "DrawableObject.h"
 #include "Content.h"
 
+DrawableObject::DrawableObject()
+{
+
+}
+DrawableObject::DrawableObject(std::string _tag)
+{
+	tag = _tag;
+}
+
 void DrawableObject::Set_Texture(SDL_Texture& _texture)
 {
 	texture = &_texture;
