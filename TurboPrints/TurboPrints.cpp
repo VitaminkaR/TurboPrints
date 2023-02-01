@@ -81,9 +81,13 @@ bool init()
 	bool success = true;
 
 	objects = new std::vector<DrawableObject*>();
-
-	IMG_Init(IMG_INIT_PNG);
-
+	
+	if (IMG_Init(IMG_INIT_PNG) < 0)
+	{
+		printf("IMG could not initialize! IMG_Error: %s\n", IMG_GetError());
+		success = false;
+	}
+	
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
