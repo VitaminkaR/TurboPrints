@@ -12,7 +12,7 @@ void ControlPanel::Init()
 {
 	isShow = false;
 	Vector2 pos; pos.x = 0; pos.y = 0;
-	Button* b = new Button(pos, *gRenderer, textures->at(1));
+	Button* b = new Button(pos, textures->at(1));
 	call_button = b;
 	call_button->position = { WIDTH - 32, 0 };
 }

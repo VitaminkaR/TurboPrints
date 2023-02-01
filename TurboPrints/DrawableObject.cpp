@@ -5,16 +5,14 @@ DrawableObject::DrawableObject()
 {
 }
 
-DrawableObject::DrawableObject(Vector2 _position, SDL_Renderer& _renderer)
+DrawableObject::DrawableObject(Vector2 _position)
 {
 	position = _position;
-	renderer = &_renderer;
 }
 
-DrawableObject::DrawableObject(Vector2 _position, SDL_Renderer& _renderer, SDL_Texture& _texture)
+DrawableObject::DrawableObject(Vector2 _position, SDL_Texture& _texture)
 {
 	position = _position;
-	renderer = &_renderer;
 	texture = &_texture;
 	int w, h;
 	SDL_QueryTexture(texture, NULL, NULL, &w, &h);
@@ -37,7 +35,7 @@ void DrawableObject::Draw()
 {
 	if (texture != NULL) 
 	{
-		render_texture(texture, renderer, position.x, position.y, tsize.x, tsize.y);
+		render_texture(texture, gRenderer, position.x, position.y, tsize.x, tsize.y);
 	}
 }
 

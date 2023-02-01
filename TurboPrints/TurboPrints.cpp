@@ -2,6 +2,7 @@
 #include "Content.h"
 #include "Menu.h"
 #include "ControlPanel.h"
+#include "WindowPanel.h"
 
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
@@ -16,9 +17,9 @@ const int HEIGHT = 720;
 // кол-во миллисекунд ожидания межу обновлениями
 // сильно замедляет приложение (заметно только на слабых устр-вах)
 // снимает огромную нагрузку на ядро процессора (цикл без замедления выполняется крайне часто, вызывая кучу отрисовок(и прочего),
-// поэтому насильно замедляем цикл, т к over-*****-fps нам не нужно, достаточно и 30
-// стандарт 5 ms - около 60 fps
-const int FRAMES = 5;
+// поэтому насильно замедляем цикл, т к over-много-fps нам не нужно, достаточно и 30
+// стандарт 15 ms - около 60 fps
+const int FRAMES = 15;
 
 bool init();
 void close();
@@ -140,4 +141,5 @@ void create_scene()
 	objects->push_back(new ControlPanel());
 	ControlPanel* cp = (ControlPanel*)objects->at(objects->size() - 1);
 	cp->Init();
+	objects->push_back(new WindowPanel());
 }

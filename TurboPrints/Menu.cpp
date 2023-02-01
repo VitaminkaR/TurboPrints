@@ -12,7 +12,7 @@ void Menu::Init()
 {
 	isShow = false;
 	Vector2 pos; pos.x = 0; pos.y = 0;
-	Button* call_b = new Button(pos, *gRenderer, textures->at(0));
+	Button* call_b = new Button(pos, textures->at(0));
 	call_button = call_b;
 }
 
@@ -24,7 +24,7 @@ void Menu::Show()
 	
 	// create buttons
 	Vector2 pos; pos.x = 64; pos.y = HEIGHT - 64;
-	Button* compile_b = new Button(pos, *gRenderer, textures->at(2));
+	Button* compile_b = new Button(pos, textures->at(2));
 	compile_button = compile_b;
 }
 

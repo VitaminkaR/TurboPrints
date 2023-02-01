@@ -9,6 +9,7 @@ void load_content()
 	textures->push_back(load_image(gRenderer, "./Resource/images/menu_button.png"));
 	textures->push_back(load_image(gRenderer, "./Resource/images/control_panel.png"));
 	textures->push_back(load_image(gRenderer, "./Resource/images/compile_button.png"));
+	textures->push_back(load_image(gRenderer, "./Resource/images/window_panel.png"));
 }
 
 void unload_content()
