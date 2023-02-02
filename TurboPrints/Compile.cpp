@@ -13,7 +13,7 @@ void compile()
     std::string error;
 
     // компиляция
-
+ 
 
     if(error != "")
         std::cout << "ERROR " + error << std::endl;

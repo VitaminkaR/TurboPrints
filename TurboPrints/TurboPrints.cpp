@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "ControlPanel.h"
 #include "WindowPanel.h"
+#include "DataWindowManager.h"
 
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
@@ -146,4 +147,6 @@ void create_scene()
 
 	std::vector<DrawableObject*>** data_window = wp->GetScene(1);
 	*data_window = new std::vector<DrawableObject*>();
+
+	(*data_window)->push_back(new DataWindowManager);
 }

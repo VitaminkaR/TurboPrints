@@ -134,6 +134,7 @@
     <ClCompile Include="Compile.cpp" />
     <ClCompile Include="Content.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
+    <ClCompile Include="DataWindowManager.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Compile.h" />
     <ClInclude Include="Content.h" />
     <ClInclude Include="ControlPanel.h" />
+    <ClInclude Include="DataWindowManager.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="platform.h" />
