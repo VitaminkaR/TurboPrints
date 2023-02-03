@@ -1,14 +1,17 @@
 #include "DataWindowManager.h"
+#include "InputBox.h"
+
 
 DataWindowManager::DataWindowManager()
 {
-	Vector2 v; v.x = 32, v.y = 32;
+	Vector2 v; v.x = 0; v.y = 32;
 	add_var_button = new Button(v, textures->at(4));
 }
 
-void DataWindowManager::Show()
+void DataWindowManager::Draw()
 {
 	add_var_button->Draw();
+	draw_text(200, 200, "b");
 }
 
 void DataWindowManager::Event_Handle(SDL_Event& e)

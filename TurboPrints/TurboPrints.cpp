@@ -4,6 +4,7 @@
 #include "ControlPanel.h"
 #include "WindowPanel.h"
 #include "DataWindowManager.h"
+#include "RenderText.h"
 
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
@@ -88,6 +89,10 @@ bool init()
 	objects = new std::vector<DrawableObject*>();
 	
 	// инициализация компонентов
+	if (FT_Init())
+	{
+		printf("FT could not initialize!");
+	}
 	if (IMG_Init(IMG_INIT_PNG) < 0)
 	{
 		printf("IMG could not initialize! IMG_Error: %s\n", IMG_GetError());

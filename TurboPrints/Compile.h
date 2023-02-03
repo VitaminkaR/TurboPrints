@@ -18,5 +18,3 @@ struct Var
 	VarType var_type;
 	std::string value;
 };
-
-std::vector<Var> vars;

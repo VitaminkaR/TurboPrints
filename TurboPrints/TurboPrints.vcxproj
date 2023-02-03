@@ -104,13 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Others\Projects\Libs\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Others\Projects\Libs\FreeType\include;C:\Others\Projects\Libs\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Others\Projects\Libs\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Others\Projects\Libs\FreeType\x64;C:\Others\Projects\Libs\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2main.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -136,7 +136,9 @@
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="DataWindowManager.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
+    <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WindowPanel.cpp" />
@@ -147,9 +149,11 @@
     <ClInclude Include="Content.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="DataWindowManager.h" />
+    <ClInclude Include="InputBox.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="platform.h" />
+    <ClInclude Include="RenderText.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="WindowPanel.h" />
   </ItemGroup>

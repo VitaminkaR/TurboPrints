@@ -1,5 +1,7 @@
 #include "Compile.h"
 
+std::vector<Var> vars;
+
 void compile()
 {
 	std::cout << "Start compile" << std::endl;

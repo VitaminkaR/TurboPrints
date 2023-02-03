@@ -3,6 +3,7 @@
 #include "DrawableObject.h"
 #include "Button.h"
 #include "Compile.h"
+#include "RenderText.h";
 
 extern std::vector<SDL_Texture*>* textures;
 extern std::vector<Var> vars;
@@ -14,7 +15,7 @@ public:
 
 	DataWindowManager();
 
-	void Show();
+	void Draw();
 	void Event_Handle(SDL_Event &e);
 	void Dispose();
 

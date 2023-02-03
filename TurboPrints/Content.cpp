@@ -1,10 +1,14 @@
 #include "Content.h"
+#include "RenderText.h"
 
 extern std::vector<SDL_Texture*>* textures;
 extern SDL_Renderer* gRenderer;
 
 void load_content()
 {
+	load_font("days2.ttf");
+	set_font_size(512);
+
 	textures = new std::vector<SDL_Texture*>();
 	textures->push_back(load_image(gRenderer, "./Resource/images/menu_button.png"));
 	textures->push_back(load_image(gRenderer, "./Resource/images/control_panel.png"));
