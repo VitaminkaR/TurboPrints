@@ -11,7 +11,8 @@ DataWindowManager::DataWindowManager()
 void DataWindowManager::Draw()
 {
 	add_var_button->Draw();
-	draw_text(200, 200, "b");
+	draw_text(200, 200, "Input");
+	draw_text(200, 400, "Var");
 }
 
 void DataWindowManager::Event_Handle(SDL_Event& e)

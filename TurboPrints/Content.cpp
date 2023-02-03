@@ -6,8 +6,8 @@ extern SDL_Renderer* gRenderer;
 
 void load_content()
 {
-	load_font("days2.ttf");
-	set_font_size(512);
+	load_font("Volkswagen medium.ttf");
+	set_font_size(32);
 
 	textures = new std::vector<SDL_Texture*>();
 	textures->push_back(load_image(gRenderer, "./Resource/images/menu_button.png"));
