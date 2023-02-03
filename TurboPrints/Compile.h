@@ -17,4 +17,5 @@ struct Var
 {
 	VarType var_type;
 	std::string value;
+	std::string name;
 };

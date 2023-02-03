@@ -29,5 +29,14 @@ void DataWindowManager::Dispose()
 
 void DataWindowManager::AddVar()
 {
-	
+	//debug
+	Var v;
+	v.name = "a";
+	v.value = "5";
+	v.var_type = BYTE;
+	vars.push_back(v);
+	v.name = "_str";
+	v.value = "Hello!";
+	v.var_type = STRING;
+	vars.push_back(v);
 }
