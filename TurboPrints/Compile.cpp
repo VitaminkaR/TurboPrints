@@ -49,3 +49,25 @@ void compile()
 
     out.close();
 }
+
+std::string get_string_vartype(VarType vt)
+{
+    switch (vt)
+    {
+    case INT:
+        return "INT";
+        break;
+    case SHORT:
+        return "SHORT INT";
+        break;
+    case BYTE:
+        return "BYTE";
+        break;
+    case ARRAY:
+        return "ARRAY";
+        break;
+    case STRING:
+        return "STRING";
+        break;
+    }
+}

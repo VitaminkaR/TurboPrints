@@ -12,6 +12,7 @@ class DataWindowManager : public DrawableObject
 {
 public:
 	Button *add_var_button;
+	int list_offset;
 
 	DataWindowManager();
 
