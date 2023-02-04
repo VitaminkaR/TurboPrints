@@ -137,6 +137,7 @@
     <ClCompile Include="DataWindowManager.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="InputBox.cpp" />
+    <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="DataWindowManager.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="RenderText.h" />

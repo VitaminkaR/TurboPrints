@@ -1,5 +1,4 @@
 #include "DataWindowManager.h"
-#include "InputBox.h"
 
 DataWindowManager::DataWindowManager()
 {
@@ -16,8 +15,11 @@ void DataWindowManager::Draw()
 			break;
 		draw_text(0, 96 + (i + list_offset) * 32, vars.at(i).name, 255, 0, 0, 0.2);
 		std::string var_type = get_string_vartype(vars.at(i).var_type);
-		draw_text(256, 96 + (i + list_offset) * 32, var_type, 200, 200, 50, 0.2);
-		draw_text(400, 96 + (i + list_offset) * 32, vars.at(i).value, 0, 250, 0, 0.2);
+		if(i != id_edit_var || el_edit_var != 1)
+			draw_text(512, 96 + (i + list_offset) * 32, var_type, 200, 200, 50, 0.2);
+		else
+			draw_text(512, 96 + (i + list_offset) * 32, str_edit_type, 200, 200, 50, 0.2);
+		draw_text(740, 96 + (i + list_offset) * 32, vars.at(i).value, 0, 250, 0, 0.2);
 	}
 }
 
@@ -27,6 +29,7 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 	{
 		AddVar();
 	}
+	// управление скорллом
 	if (e.type == SDL_MOUSEWHEEL)
 	{
 		list_offset += e.wheel.y;
@@ -34,6 +37,92 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 			list_offset = 0;
 		if(list_offset * -1 >= vars.size() - 5)
 			list_offset = (vars.size() - 5) * -1;
+	}
+	// выбор редактирования переменных и их удаление
+	if (e.type == SDL_MOUSEBUTTONDOWN)
+	{
+		Vector2 mpos; mpos.x = e.button.x; mpos.y = e.button.y;
+		// находим индекс переменной на которую нажал пользователь
+		int ofs = mpos.y - 64;
+		if(ofs < 0)
+			return;
+		int id = ofs / 32;
+		if (id >= 0 && id <= 20 && id - list_offset < vars.size())
+		{
+			id -= list_offset;
+			id_edit_var = id;
+			std::cout << id;
+		}
+		else
+		{
+			id_edit_var = -1;
+		}
+
+		// удаление переменной
+		if (e.button.button == SDL_BUTTON_RIGHT && id_edit_var > -1)
+		{
+			vars.erase(vars.begin() + id_edit_var);
+		}
+		// смотрим что конкретно будет настраивать пользователь
+		if (e.button.button == SDL_BUTTON_LEFT && id_edit_var > -1)
+		{
+			if(mpos.x < 512)
+				el_edit_var = 0;
+			else if (mpos.x > 740)
+				el_edit_var = 2;
+			else
+				el_edit_var = 1;
+			std::cout << " - " << el_edit_var << std::endl;
+		}
+	}
+
+	// само редактирование переменной
+	if (e.type == SDL_KEYDOWN && id_edit_var > -1)
+	{
+		SDL_Keycode kc = e.key.keysym.sym;
+		char c;
+
+		// обработка спец клавиш
+		if (!get_keyboard_char(c))
+		{
+			// enter или esc - выход из режима редактирования
+			if (kc == 27 || kc == 13)
+			{
+				id_edit_var = -1;
+				str_edit_type = "";
+			}
+				
+			// стирает символ
+			if (kc == 8)
+			{
+				if(el_edit_var == 0)
+					vars.at(id_edit_var).name.pop_back();
+				else if (el_edit_var == 1)
+					str_edit_type = "";
+				else
+					vars.at(id_edit_var).value.pop_back();
+			}
+
+			return;
+		}
+
+		switch (el_edit_var)
+		{
+		case 0:
+			vars.at(id_edit_var).name += c;
+			break;
+		case 1:
+			str_edit_type += c;
+			// пытаемся присвоить тип
+			vars.at(id_edit_var).var_type = get_vartype_string(str_edit_type);
+			break;
+		case 2:
+			std::string *str = &vars.at(id_edit_var).value;
+			if(*str == "?")
+				*str = "";
+			*str += c;
+			break;
+		}
 	}
 }
 

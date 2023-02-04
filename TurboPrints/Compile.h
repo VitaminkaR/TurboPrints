@@ -21,3 +21,4 @@ struct Var
 };
 
 std::string get_string_vartype(VarType vt);
+VarType get_vartype_string(std::string &str);

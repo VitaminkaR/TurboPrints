@@ -5,6 +5,7 @@
 #include "WindowPanel.h"
 #include "DataWindowManager.h"
 #include "RenderText.h"
+#include "KeyboardHandler.h"
 
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
@@ -49,6 +50,7 @@ int SDL_main(int argc, char* argv[])
 			}
 
 			wp->Event_Handle(e);
+			keyboard_handler(e);
 
 			for (int i = 0; i < objects->size(); i++)
 			{
