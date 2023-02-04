@@ -31,7 +31,8 @@ int init_font(const char* path)
 		SDL_Texture* texture = SDL_CreateTextureFromSurface(gRenderer, s);
 		int w, h;
 		SDL_QueryTexture(texture, 0, 0, &w, &h);
-		Sym sym; sym.texture = texture; sym.w = w; sym.h = h;
+		Sym sym; sym.texture = texture; sym.w = w; sym.h = h; 
+		sym.gw = font->glyph->advance.x >> 6; sym.gh = font->glyph->metrics.horiBearingY >> 6;
 		symbols.push_back(sym);
 		SDL_FreeSurface(s);
 	}
@@ -43,7 +44,7 @@ void draw_text(int x, int y, std::string text)
 	for (int i = 0; i < text.size(); i++)
 	{
 		Sym sym = symbols.at(int(text[i]));
-		render_texture(sym.texture, gRenderer, xoffset, y,sym.w, sym.h);
-		xoffset += (font->glyph->advance.x >> 6) / 4;
+		render_texture(sym.texture, gRenderer, xoffset, y - sym.gh,sym.w, sym.h);
+		xoffset += sym.gw / 4;
 	}
 }

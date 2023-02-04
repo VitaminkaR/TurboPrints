@@ -15,4 +15,5 @@ struct Sym
 {
 	SDL_Texture *texture;
 	int w, h;
+	int gw, gh; // glyph metrics (gw - advance size, gh - рассто€ние от базовой линии до высшей точки знака)
 };
