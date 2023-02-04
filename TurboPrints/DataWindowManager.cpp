@@ -105,11 +105,14 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 
 			return;
 		}
-
+		std::string* str;
 		switch (el_edit_var)
 		{
 		case 0:
-			vars.at(id_edit_var).name += c;
+			str = &vars.at(id_edit_var).name;
+			if (*str == "VARNAME")
+				*str = "";
+			*str += c;
 			break;
 		case 1:
 			str_edit_type += c;
@@ -117,7 +120,7 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 			vars.at(id_edit_var).var_type = get_vartype_string(str_edit_type);
 			break;
 		case 2:
-			std::string *str = &vars.at(id_edit_var).value;
+			str = &vars.at(id_edit_var).value;
 			if(*str == "?")
 				*str = "";
 			*str += c;

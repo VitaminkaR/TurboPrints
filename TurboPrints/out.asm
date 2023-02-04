@@ -1,7 +1,7 @@
 ;CREATED BY TURBOPRINTS
 
 data_segment segment
-	a db 0
-	_str db 'Hello!'
+	strr db 'hello'
+	length db 0
 data_segment ends
 
