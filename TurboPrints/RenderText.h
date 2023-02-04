@@ -10,6 +10,9 @@ extern SDL_Renderer* gRenderer;
 int FT_Init();
 int init_font(const char* path);
 void draw_text(int x, int y, std::string text);
+void draw_text(int x, int y, std::string text, float size);
+void draw_text(int x, int y, std::string text, int r, int g, int b);
+void draw_text(int x, int y, std::string text, int r, int g, int b, float size);
 
 struct Sym
 {

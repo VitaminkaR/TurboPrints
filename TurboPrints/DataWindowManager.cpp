@@ -1,7 +1,6 @@
 #include "DataWindowManager.h"
 #include "InputBox.h"
 
-
 DataWindowManager::DataWindowManager()
 {
 	Vector2 v; v.x = 0; v.y = 32;
@@ -11,8 +10,6 @@ DataWindowManager::DataWindowManager()
 void DataWindowManager::Draw()
 {
 	add_var_button->Draw();
-	draw_text(200, 200, "Input");
-	draw_text(200, 400, "Var");
 }
 
 void DataWindowManager::Event_Handle(SDL_Event& e)

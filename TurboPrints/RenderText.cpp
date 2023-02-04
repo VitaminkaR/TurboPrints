@@ -5,7 +5,7 @@ FT_Face font;
 
 std::vector<Sym> symbols;
 
-const int quality = 32;
+const int quality = 128;
 
 int FT_Init() 
 {
@@ -46,5 +46,42 @@ void draw_text(int x, int y, std::string text)
 		Sym sym = symbols.at(int(text[i]));
 		render_texture(sym.texture, gRenderer, xoffset, y - sym.gh,sym.w, sym.h);
 		xoffset += sym.gw / 4;
+	}
+}
+
+void draw_text(int x, int y, std::string text, float size)
+{
+	int xoffset = x;
+	for (int i = 0; i < text.size(); i++)
+	{
+		Sym sym = symbols.at(int(text[i]));
+		render_texture(sym.texture, gRenderer, xoffset, y - sym.gh / size, sym.w / size, sym.h / size);
+		xoffset += sym.gw / 4 / size;
+	}
+}
+
+void draw_text(int x, int y, std::string text, int r, int g, int b)
+{
+	int xoffset = x;
+	for (int i = 0; i < text.size(); i++)
+	{
+		Sym sym = symbols.at(int(text[i]));
+		SDL_SetTextureColorMod(sym.texture, r, g, b);
+		render_texture(sym.texture, gRenderer, xoffset, y - sym.gh, sym.w, sym.h);
+		SDL_SetTextureColorMod(sym.texture, 255, 255, 255);
+		xoffset += sym.gw / 4;
+	}
+}
+
+void draw_text(int x, int y, std::string text, int r, int g, int b, float size)
+{
+	int xoffset = x;
+	for (int i = 0; i < text.size(); i++)
+	{
+		Sym sym = symbols.at(int(text[i]));
+		SDL_SetTextureColorMod(sym.texture, r, g, b);
+		render_texture(sym.texture, gRenderer, xoffset, y - sym.gh / size, sym.w / size, sym.h / size);
+		SDL_SetTextureColorMod(sym.texture, 255, 255, 255);
+		xoffset += sym.gw / 4 / size;
 	}
 }
