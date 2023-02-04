@@ -20,8 +20,34 @@ bool get_keyboard_char(char &c)
 		currentScanCode == SDL_SCANCODE_BACKSPACE) return false;
 
 	bool isBig = isCapsLock ^ isShift;
-	if (isBig)
+	if (isBig) 
+	{
 		c = (char)std::toupper(c);
+
+		if(currentScanCode == SDL_SCANCODE_0)
+			c = ')';
+		else if(currentScanCode == SDL_SCANCODE_1)
+			c = '!';
+		else if (currentScanCode == SDL_SCANCODE_2)
+			c = '@';
+		else if (currentScanCode == SDL_SCANCODE_3)
+			c = '#';
+		else if (currentScanCode == SDL_SCANCODE_4)
+			c = '$';
+		else if (currentScanCode == SDL_SCANCODE_5)
+			c = '%';
+		else if (currentScanCode == SDL_SCANCODE_6)
+			c = '^';
+		else if (currentScanCode == SDL_SCANCODE_7)
+			c = '&';
+		else if (currentScanCode == SDL_SCANCODE_8)
+			c = '*';
+		else if (currentScanCode == SDL_SCANCODE_9)
+			c = '(';
+		else if (currentScanCode == SDL_SCANCODE_MINUS)
+			c = '_';
+	}
+		
 	return true;
 }
 
