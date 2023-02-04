@@ -10,6 +10,7 @@ DataWindowManager::DataWindowManager()
 void DataWindowManager::Draw()
 {
 	add_var_button->Draw();
+	draw_text(0, 250, "Hello World!", 255, 255, 100, 0.5);
 }
 
 void DataWindowManager::Event_Handle(SDL_Event& e)
