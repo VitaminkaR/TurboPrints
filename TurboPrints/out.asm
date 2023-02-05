@@ -1,7 +1,6 @@
 ;CREATED BY TURBOPRINTS
 
 data_segment segment
-	strr db 'hello'
-	length db 0
+	name db 'Oleg - krasava'
 data_segment ends
 

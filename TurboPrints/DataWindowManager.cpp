@@ -13,13 +13,9 @@ void DataWindowManager::Draw()
 	{
 		if (i >= vars.size())
 			break;
-		draw_text(0, 96 + (i + list_offset) * 32, vars.at(i).name, 255, 0, 0, 0.2);
-		std::string var_type = get_string_vartype(vars.at(i).var_type);
-		if(i != id_edit_var || el_edit_var != 1)
-			draw_text(512, 96 + (i + list_offset) * 32, var_type, 200, 200, 50, 0.2);
-		else
-			draw_text(512, 96 + (i + list_offset) * 32, str_edit_type, 200, 200, 50, 0.2);
-		draw_text(740, 96 + (i + list_offset) * 32, vars.at(i).value, 0, 250, 0, 0.2);
+		draw_text(0, (i + list_offset) * 32 + 64, vars.at(i).texture[0], 225, 0, 0);
+		draw_text(512, (i + list_offset) * 32 + 64, vars.at(i).texture[1], 225, 225, 0);
+		draw_text(740, (i + list_offset) * 32 + 64, vars.at(i).texture[2], 0, 200, 0);
 	}
 }
 
@@ -38,6 +34,7 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 		if(list_offset * -1 >= vars.size() - 5)
 			list_offset = (vars.size() - 5) * -1;
 	}
+
 	// выбор редактирования переменных и их удаление
 	if (e.type == SDL_MOUSEBUTTONDOWN)
 	{
@@ -101,10 +98,12 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 					str_edit_type = "";
 				else
 					vars.at(id_edit_var).value.pop_back();
+				UpdateTextVar(&vars.at(id_edit_var));
 			}
 
 			return;
 		}
+
 		std::string* str;
 		switch (el_edit_var)
 		{
@@ -126,6 +125,8 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 			*str += c;
 			break;
 		}
+
+		UpdateTextVar(&vars.at(id_edit_var));
 	}
 }
 
@@ -141,5 +142,29 @@ void DataWindowManager::AddVar()
 	v.name = "VARNAME";
 	v.value = "?";
 	v.var_type = BYTE;
+	v.texture[0] = 0;
+	v.texture[1] = 0;
+	v.texture[2] = 0;
+	v.texture[0] = create_text(v.name, 0.2);
+	v.texture[1] = create_text(get_string_vartype(v.var_type), 0.2);
+	v.texture[2] = create_text(v.value, 0.2);
 	vars.push_back(v);
+}
+
+void DataWindowManager::UpdateTextVar(Var* var)
+{
+	if(var->texture[el_edit_var] != 0)
+		SDL_DestroyTexture(var->texture[el_edit_var]);
+	switch (el_edit_var)
+	{
+	case 0:
+		var->texture[el_edit_var] = create_text(var->name, 0.2);
+		break;
+	case 1:
+		var->texture[el_edit_var] = create_text(get_string_vartype(var->var_type), 0.2);
+		break;
+	case 2:
+		var->texture[el_edit_var] = create_text(var->value, 0.2);
+		break;
+	}
 }

@@ -39,30 +39,33 @@ int init_font(const char* path)
 	}
 }
 
-void draw_text(int x, int y, std::string text)
+void draw_text(int x, int y, SDL_Texture* texture, int r, int g, int b)
 {
-	draw_text(x, y, text, 255, 255, 255, 1);
+	SDL_SetTextureColorMod(texture, r, g, b);
+	int w, h;
+	SDL_QueryTexture(texture, 0, 0, &w, &h);
+	render_texture(texture, gRenderer, x, y, w, h);
+	SDL_SetTextureColorMod(texture, 255, 255, 255);
 }
 
-void draw_text(int x, int y, std::string text, float size)
+SDL_Texture* create_text( std::string text, float size)
 {
-	draw_text(x, y, text, 255, 255, 255, size);
-}
+	SDL_Texture *texture = SDL_CreateTexture(gRenderer, SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, text.size() * quality * size, quality * size);
+	SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderTarget(gRenderer, texture);
 
-void draw_text(int x, int y, std::string text, int r, int g, int b)
-{
-	draw_text(x, y, text, r, g, b, 1);
-}
-
-void draw_text(int x, int y, std::string text, int r, int g, int b, float size)
-{
-	int xoffset = x;
+	int xoffset = 0;
 	for (int i = 0; i < text.size(); i++)
 	{
 		Sym sym = symbols[int(text[i])];
-		SDL_SetTextureColorMod(sym.texture, r, g, b);
-		render_texture(sym.texture, gRenderer, xoffset, y - sym.gh * size, sym.w * size, sym.h * size);
-		SDL_SetTextureColorMod(sym.texture, 255, 255, 255);
+		SDL_Rect rect;
+		rect.x = xoffset;
+		rect.y = 0 - sym.gh * size  + quality * size;
+		rect.w = sym.w * size;
+		rect.h = sym.h * size;
+		SDL_RenderCopy(gRenderer, sym.texture, 0, &rect);
 		xoffset += sym.gw / 4 * size;
 	}
+	SDL_SetRenderTarget(gRenderer, 0);
+	return texture;
 }

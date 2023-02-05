@@ -23,6 +23,7 @@ public:
 	void Draw();
 	void Event_Handle(SDL_Event &e);
 	void Dispose();
+	void UpdateTextVar(Var *var);
 
 	void AddVar();
 };
