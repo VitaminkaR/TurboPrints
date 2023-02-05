@@ -1,13 +1,7 @@
 #pragma once
 
-#include "DrawableObject.h"
+#include "platform.h"
 
-class Button : public DrawableObject
-{
-public:
-	Button(Vector2 _position, SDL_Texture *_texture);
-	Button(Vector2 _position, int w, int h);
-
-	bool Request(SDL_Event& _event);
-};
+bool check_button(SDL_Event &e, int x, int y, int w, int h);
+bool check_button(SDL_Event& e, int x, int y, SDL_Texture *texture);
 

@@ -1,39 +1,21 @@
 #include "ControlPanel.h"
 
-void ControlPanel::Call_Button()
+extern const int HEIGHT;
+extern SDL_Renderer* gRenderer;
+extern SDL_Texture* textures[];
+
+namespace ControlPanel
 {
-	if (isShow)
-		Close();
-	else
-		Show();
-}
+	Vector2 call_button_pos = { WIDTH - 32, 0 };
 
-ControlPanel::ControlPanel()
-{
-	isShow = false;
-	Vector2 pos; pos.x = WIDTH - 32; pos.y = 0;
-	call_button = new Button(pos, textures->at(1));
-}
-
-void ControlPanel::Show()
-{
-	call_button->position = { WIDTH - WIDTH / 5 - 32, 0 };
-	isShow = true;
-
-	// создание кнопок
-}
-
-void ControlPanel::Close()
-{
-	call_button->position = { WIDTH - 32, 0 };
-	isShow = false;
-
-	// удаление кнопок
+	int list_offset;
+	bool focus; // если курсор внутри области панели
+	bool isShow = false;
 }
 
 void ControlPanel::Draw()
 {
-	call_button->Draw();
+	render_texture(textures[1], gRenderer, call_button_pos.x, call_button_pos.y);
 	if (isShow)
 	{
 		SDL_Rect fillRect = { WIDTH - WIDTH / 5, 0, WIDTH / 5, HEIGHT };
@@ -46,9 +28,18 @@ void ControlPanel::Draw()
 
 void ControlPanel::Event_Handle(SDL_Event& e)
 {
-	if (call_button->Request(e))
+	if (check_button(e, call_button_pos.x, call_button_pos.y, textures[1]))
 	{
-		Call_Button();
+		if (isShow)
+		{
+			call_button_pos.x = WIDTH - 32;
+			isShow = false;
+		}
+		else
+		{
+			call_button_pos.x = WIDTH - WIDTH / 5 - 32;
+			isShow = true;
+		}
 	}
 
 	if (isShow)
@@ -69,11 +60,5 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 			std::cout << list_offset << std::endl;
 		}
 
-		// отрисовка кнопок инструментов
 	}
-}
-
-void ControlPanel::Dispose()
-{
-	delete call_button;
 }

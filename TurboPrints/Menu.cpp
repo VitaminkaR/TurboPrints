@@ -1,42 +1,19 @@
 #include "Menu.h"
 
-void Menu::Call_Button()
-{
-	if (isShow)
-		Close();
-	else
-		Show();
-}
+extern const int WIDTH;
+extern SDL_Renderer* gRenderer;
+extern SDL_Texture* textures[];
 
-Menu::Menu()
+namespace Menu
 {
-	tag = "menu";
-	isShow = false;
-	Vector2 pos; pos.x = 0; pos.y = 0;
-	call_button = new Button(pos, textures->at(0));
-}
-
-void Menu::Show()
-{
-	isShow = true;
-
-	call_button->position = { WIDTH / 5, 0 };
-	
-	// create buttons
-	Vector2 pos; pos.x = 64; pos.y = HEIGHT - 64;
-	compile_button = new Button(pos, textures->at(2));;
-}
-
-void Menu::Close()
-{
-	isShow = false;
-	delete compile_button;
-	call_button->position = { 0, 0 };
+	Vector2 call_button_pos;
+	Vector2 compile_button_pos = { 64, HEIGHT - 64 };
+	bool isShow = false;
 }
 
 void Menu::Draw()
 {
-	call_button->Draw();
+	render_texture(textures[0], gRenderer, call_button_pos.x, call_button_pos.y);
 	if (isShow)
 	{
 		SDL_Rect fillRect = { 0, 0, WIDTH / 5, HEIGHT };
@@ -44,25 +21,28 @@ void Menu::Draw()
 		SDL_RenderFillRect(gRenderer, &fillRect);
 
 		// отрисока кнопок
-		compile_button->Draw();
+		render_texture(textures[2], gRenderer, compile_button_pos.x, compile_button_pos.y);
 	}
 }
 
 void Menu::Event_Handle(SDL_Event& e)
 {
-	if (call_button->Request(e))
+	if (check_button(e, call_button_pos.x, call_button_pos.y, textures[0]))
 	{
-		Call_Button();
+		if (isShow)
+		{
+			isShow = false;
+			call_button_pos.x = 0;
+		}
+		else
+		{
+			isShow = true;
+			call_button_pos.x = WIDTH / 5;
+		}
 	}
 	if (isShow)
 	{
-		if(compile_button->Request(e))
+		if(check_button(e, compile_button_pos.x, compile_button_pos.y, textures[2]))
 			compile();
 	}
-}
-
-void Menu::Dispose()
-{
-	delete call_button;
-	if(compile_button != nullptr) delete compile_button;
 }

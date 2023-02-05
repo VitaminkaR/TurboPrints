@@ -42,9 +42,7 @@ int init_font(const char* path)
 void draw_text(int x, int y, SDL_Texture* texture, int r, int g, int b)
 {
 	SDL_SetTextureColorMod(texture, r, g, b);
-	int w, h;
-	SDL_QueryTexture(texture, 0, 0, &w, &h);
-	render_texture(texture, gRenderer, x, y, w, h);
+	render_texture(texture, gRenderer, x, y);
 	SDL_SetTextureColorMod(texture, 255, 255, 255);
 }
 

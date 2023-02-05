@@ -1,14 +1,20 @@
 #include "DataWindowManager.h"
 
-DataWindowManager::DataWindowManager()
+extern SDL_Texture* textures[];
+extern std::vector<Var> vars;
+
+namespace DataWindowManager
 {
-	Vector2 v; v.x = 0; v.y = 32;
-	add_var_button = new Button(v, textures->at(4));
+	Vector2 add_var_button_pos = {0, 32};
+	int list_offset;
+	int id_edit_var = -1;
+	int el_edit_var; // какой элемент настраивает пользователь (0-2) по структуре переменной соответственно
+	std::string str_edit_type; // переменная для ввода типа
 }
 
 void DataWindowManager::Draw()
 {
-	add_var_button->Draw();
+	render_texture(textures[4], gRenderer, add_var_button_pos.x, add_var_button_pos.y);
 	for (int i = -1 * list_offset; i < 20 - list_offset; i++)
 	{
 		if (i >= vars.size())
@@ -21,7 +27,7 @@ void DataWindowManager::Draw()
 
 void DataWindowManager::Event_Handle(SDL_Event& e)
 {
-	if (add_var_button->Request(e))
+	if (check_button(e, add_var_button_pos.x, add_var_button_pos.y, textures[4]))
 	{
 		AddVar();
 	}
@@ -128,11 +134,6 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 
 		UpdateTextVar(&vars.at(id_edit_var));
 	}
-}
-
-void DataWindowManager::Dispose()
-{
-	delete add_var_button;
 }
 
 void DataWindowManager::AddVar()

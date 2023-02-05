@@ -135,8 +135,6 @@
     <ClCompile Include="Content.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="DataWindowManager.cpp" />
-    <ClCompile Include="DrawableObject.cpp" />
-    <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="RenderText.cpp" />
@@ -150,14 +148,11 @@
     <ClInclude Include="Content.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="DataWindowManager.h" />
-    <ClInclude Include="InputBox.h" />
-    <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="RenderText.h" />
     <ClInclude Include="Utils.h" />
-    <ClInclude Include="WindowPanel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

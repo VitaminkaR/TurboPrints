@@ -7,13 +7,6 @@
 #include "RenderText.h"
 #include "KeyboardHandler.h"
 
-SDL_Window* gWindow = NULL;
-SDL_Surface* gScreenSurface = NULL;
-SDL_Renderer* gRenderer = NULL;				// основной рендер
-std::vector<SDL_Texture*>* textures;		// хранит загруженные текстуры
-std::vector<DrawableObject*>* objects;		// хранит объекты 
-WindowPanel *wp = NULL;							// управляет окнами(не ОС, а внутрипрограммными)
-
 const int WIDTH = 1280;
 const int HEIGHT = 720;
 // кол-во миллисекунд ожидания межу обновлениями
@@ -23,9 +16,12 @@ const int HEIGHT = 720;
 // стандарт 15 ms - около 60 fps
 const int FRAMES = 15;
 
+SDL_Window* gWindow = NULL;
+SDL_Surface* gScreenSurface = NULL;
+SDL_Renderer* gRenderer = NULL;												// основной рендер
+
 bool init();													// инициализация программы
 void close();													// отчистка данных (это может и ОС делать)
-void create_scene();										// создание основного интерфейса и объектов
 
 int SDL_main(int argc, char* argv[])
 {
@@ -33,8 +29,6 @@ int SDL_main(int argc, char* argv[])
 		return -1;
 
 	load_content();
-	wp = new WindowPanel();
-	create_scene();
 
 	bool quit = false;
 	SDL_Event e;
@@ -49,33 +43,34 @@ int SDL_main(int argc, char* argv[])
 				quit = true;
 			}
 
-			wp->Event_Handle(e);
 			keyboard_handler(e);
 
-			for (int i = 0; i < objects->size(); i++)
+			WindowPanel::Event_Handle(e);
+			if (!WindowPanel::Get_Mode())
 			{
-				if (objects->at(i) == nullptr) 
-				{
-					objects->erase(objects->begin() + i);
-					continue;
-				}
-				objects->at(i)->Event_Handle(e);
+				ControlPanel::Event_Handle(e);
+				Menu::Event_Handle(e);
 			}
+			if (WindowPanel::Get_Mode() == 1)
+			{
+				DataWindowManager::Event_Handle(e);
+			}	
 		}
 
 		SDL_SetRenderDrawColor(gRenderer, 100, 100, 100, 0xFF);
 		SDL_RenderClear(gRenderer);
 
-		wp->Draw();
-		wp->Update();
-
-		// обновление и отрисовка объектов
-		for (int i = 0; i < objects->size(); i++)
+		WindowPanel::Draw();
+		if (!WindowPanel::Get_Mode())
 		{
-			objects->at(i)->Update();
-			objects->at(i)->Draw();
+			ControlPanel::Draw();
+			Menu::Draw();
 		}
-		
+		if (WindowPanel::Get_Mode() == 1)
+		{
+			DataWindowManager::Draw();
+		}
+
 		SDL_RenderPresent(gRenderer);
 		SDL_Delay(FRAMES);
 	}
@@ -88,8 +83,6 @@ bool init()
 {
 	bool success = true;
 
-	objects = new std::vector<DrawableObject*>();
-	
 	// инициализация компонентов
 	if (FT_Init())
 	{
@@ -126,34 +119,8 @@ bool init()
 
 void close()
 {
-	//выгрузка конента
+	// тут должна быть выгрузка ресурсов, но ОС справится лучше меня (ничего не забудет)
 	unload_content();
-	delete  textures;
-
-	// выгрузка объектов
-	wp->Dispose();
-
-	// удаление окна
-	SDL_DestroyWindow(gWindow);
-	gWindow = NULL;
 
 	SDL_Quit();
-}
-
-void create_scene()
-{
-	std::vector<DrawableObject*>** scheme_window = wp->GetScene(0);
-	*scheme_window = new std::vector<DrawableObject*>();
-	objects = *scheme_window;
-
-	// tag = menu
-	(* scheme_window)->push_back(new Menu);
-	// tag = conpan
-	(*scheme_window)->push_back(new ControlPanel());
-
-
-	std::vector<DrawableObject*>** data_window = wp->GetScene(1);
-	*data_window = new std::vector<DrawableObject*>();
-
-	(*data_window)->push_back(new DataWindowManager);
 }

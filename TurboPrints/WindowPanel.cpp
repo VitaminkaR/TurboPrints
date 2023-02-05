@@ -1,61 +1,37 @@
 #include "WindowPanel.h"
 
-WindowPanel::WindowPanel()
+extern const int WIDTH;
+extern const int TEXTURE_COUNT = 64;
+extern SDL_Texture* textures[TEXTURE_COUNT];
+extern SDL_Renderer* gRenderer;
+
+namespace WindowPanel
 {
-	mode = 1;
-	tag = "winpan";
-	position.x = WIDTH / 5 + 32;
-	position.y = 0;
-	Set_Texture(*textures->at(3));
+	// mode 0 - cheme 1- data
+	int mode = 0;
 }
 
-void WindowPanel::DataWorktop()
+void WindowPanel::Draw()
 {
-	objects = windows[1];
-
-	mode = 0;
+	render_texture(textures[3], gRenderer, WIDTH / 5 + 32, 0);
 }
-void WindowPanel::SchemeWorktop()
-{
-	objects = windows[0];
 
-	mode = 1;
+int WindowPanel::Get_Mode()
+{
+	return mode;
 }
 
 void WindowPanel::Event_Handle(SDL_Event& e)
 {
 	if (e.type == SDL_MOUSEBUTTONDOWN)
 	{
-		if (!mode && IntersectRectPoint(position.x, 0, e.button.x, e.button.y, 86, 16))
+		if (mode == 1 && IntersectRectPoint(WIDTH / 5 + 32, 0, e.button.x, e.button.y, 86, 16))
 		{
-			std::cout << "WP:SCHEME" << std::endl;
-			SchemeWorktop();
+			mode = 0;
 		}
-		if (mode == 1 && IntersectRectPoint(position.x + 92, 0, e.button.x, e.button.y, 58, 16))
+		if (!mode && IntersectRectPoint(WIDTH / 5 + 32 + 92, 0, e.button.x, e.button.y, 58, 16))
 		{
-			std::cout << "WP:DATA" << std::endl;
-			DataWorktop();
+			mode = 1;
 		}
 	}
-}
-
-void WindowPanel::Dispose()
-{
-	for (int i = 0; i < WINDOW_COUNT; i++)
-	{
-		if (windows[i] != 0)
-		{
-			for (int j = 0; j < windows[i]->size(); j++)
-			{
-				windows[i]->at(j)->Dispose();
-				delete windows[i]->at(j);
-			}
-			delete windows[i];
-		}
-	}
-}
-
-std::vector<DrawableObject*>** WindowPanel::GetScene(int id)
-{
-	return windows+id;
 }

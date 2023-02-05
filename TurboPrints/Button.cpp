@@ -1,24 +1,13 @@
 #include "Button.h"
 
-Button::Button(Vector2 _position, SDL_Texture *_texture)
+bool check_button(SDL_Event& e, int x, int y, SDL_Texture* texture)
 {
-	position = _position;
-	Set_Texture(*_texture);
+	int w, h;
+	SDL_QueryTexture(texture, 0, 0, &w, &h);
+	return check_button(e, x, y, w, h);
 }
 
-Button::Button(Vector2 _position, int w, int h)
+bool check_button(SDL_Event& e, int x, int y, int w, int h)
 {
-	position = _position;
-	this->tsize.x = w;
-	this->tsize.y = h;
-}
-
-bool Button::Request(SDL_Event& _event)
-{
-	if (_event.type == SDL_MOUSEBUTTONDOWN)
-	{
-		Vector2 mpos; mpos.x = _event.button.x; mpos.y = _event.button.y;
-		return IntersectRectPoint(position.x, position.y, mpos.x, mpos.y, tsize.x, tsize.y);
-	}
-	return false;
+	return e.type == SDL_MOUSEBUTTONDOWN && IntersectRectPoint(x, y, e.button.x, e.button.y, w, h);
 }
