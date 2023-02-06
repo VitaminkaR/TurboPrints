@@ -9,7 +9,6 @@ namespace DataWindowManager
 	void Init();
 	void Draw();
 	void Event_Handle(SDL_Event &e);
-	void UpdateTextVar(Var *var);
 
 	void AddVar();
 };

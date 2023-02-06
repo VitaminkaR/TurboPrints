@@ -7,12 +7,12 @@ extern const int WIDTH;
 
 namespace DataWindowManager
 {
-	Vector2 add_var_button_pos = {0, 32};
+	Vector2 add_var_button_pos = { 0, 32 };
 	int list_offset;
 	int id_edit_var = -1;
 	int el_edit_var; // какой элемент настраивает пользователь (0-2) по структуре переменной соответственно
 	std::string str_edit_type; // переменная для ввода типа
-	InputBox *stack_input_box;
+	InputBox* stack_input_box;
 }
 
 void DataWindowManager::Init()
@@ -28,15 +28,18 @@ void DataWindowManager::Draw()
 	{
 		if (i >= vars.size())
 			break;
-		draw_text(0, (i + list_offset) * 32 + 64, vars.at(i).texture[0], 225, 0, 0);
-		draw_text(512, (i + list_offset) * 32 + 64, vars.at(i).texture[1], 225, 225, 0);
-		draw_text(740, (i + list_offset) * 32 + 64, vars.at(i).texture[2], 0, 200, 0);
+		vars.at(i).inputs[0]->Position = { 0, (i + list_offset) * 32 + 64 };
+		vars.at(i).inputs[1]->Position = { 512, (i + list_offset) * 32 + 64 };
+		vars.at(i).inputs[2]->Position = { 740, (i + list_offset) * 32 + 64 };
+		vars.at(i).inputs[0]->Draw();
+		vars.at(i).inputs[1]->Draw();
+		vars.at(i).inputs[2]->Draw();
 	}
 }
 
 void DataWindowManager::Event_Handle(SDL_Event& e)
 {
-	if(id_edit_var == -1)
+	if (id_edit_var == -1)
 		stack_size = stack_input_box->Handler(e);
 	if (check_button(e, add_var_button_pos.x, add_var_button_pos.y, textures[4]))
 	{
@@ -46,9 +49,9 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 	if (e.type == SDL_MOUSEWHEEL)
 	{
 		list_offset += e.wheel.y;
-		if(list_offset > 0)
+		if (list_offset > 0)
 			list_offset = 0;
-		if(list_offset * -1 >= vars.size() - 5)
+		if (list_offset * -1 >= vars.size() - 5)
 			list_offset = (vars.size() - 5) * -1;
 	}
 
@@ -65,7 +68,6 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 		{
 			id -= list_offset;
 			id_edit_var = id;
-			std::cout << id;
 		}
 		else
 		{
@@ -77,106 +79,36 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 		{
 			vars.erase(vars.begin() + id_edit_var);
 		}
-		// смотрим что конкретно будет настраивать пользователь
-		if (e.button.button == SDL_BUTTON_LEFT && id_edit_var > -1)
-		{
-			if(mpos.x < 512)
-				el_edit_var = 0;
-			else if (mpos.x > 740)
-				el_edit_var = 2;
-			else
-				el_edit_var = 1;
-			std::cout << " - " << el_edit_var << std::endl;
-		}
+		//// смотрим что конкретно будет настраивать пользователь
+		//if (e.button.button == SDL_BUTTON_LEFT && id_edit_var > -1)
+		//{
+		//	if(mpos.x < 512)
+		//		el_edit_var = 0;
+		//	else if (mpos.x > 740)
+		//		el_edit_var = 2;
+		//	else
+		//		el_edit_var = 1;
+		//	std::cout << " - " << el_edit_var << std::endl;
+		//}
 	}
 
-	// само редактирование переменной
-	if (e.type == SDL_KEYDOWN && id_edit_var > -1)
+	if (id_edit_var != -1)
 	{
-		SDL_Keycode kc = e.key.keysym.sym;
-		char c;
-
-		// обработка спец клавиш
-		if (!get_keyboard_char(c))
-		{
-			// enter или esc - выход из режима редактирования
-			if (kc == 27 || kc == 13)
-			{
-				id_edit_var = -1;
-				str_edit_type = "";
-			}
-				
-			// стирает символ
-			if (kc == 8)
-			{
-				if(el_edit_var == 0)
-					vars.at(id_edit_var).name.pop_back();
-				else if (el_edit_var == 1)
-					str_edit_type = "";
-				else
-					vars.at(id_edit_var).value.pop_back();
-				UpdateTextVar(&vars.at(id_edit_var));
-			}
-
-			return;
-		}
-
-		std::string* str;
-		switch (el_edit_var)
-		{
-		case 0:
-			str = &vars.at(id_edit_var).name;
-			if (*str == "VARNAME")
-				*str = "";
-			*str += c;
-			break;
-		case 1:
-			str_edit_type += c;
-			// пытаемся присвоить тип
-			vars.at(id_edit_var).var_type = get_vartype_string(str_edit_type);
-			break;
-		case 2:
-			str = &vars.at(id_edit_var).value;
-			if(*str == "?")
-				*str = "";
-			*str += c;
-			break;
-		}
-
-		UpdateTextVar(&vars.at(id_edit_var));
+		vars.at(id_edit_var).name = vars.at(id_edit_var).inputs[0]->Handler(e);
+		std::string str = vars.at(id_edit_var).inputs[1]->Handler(e);
+		vars.at(id_edit_var).var_type = get_vartype_string(str);
+		vars.at(id_edit_var).value = vars.at(id_edit_var).inputs[2]->Handler(e);
 	}
 }
 
 void DataWindowManager::AddVar()
 {
-	//debug
 	Var v;
 	v.name = "VARNAME";
 	v.value = "?";
 	v.var_type = BYTE;
-	v.texture[0] = 0;
-	v.texture[1] = 0;
-	v.texture[2] = 0;
-	v.texture[0] = create_text(v.name, 0.2);
-	v.texture[1] = create_text(get_string_vartype(v.var_type), 0.2);
-	v.texture[2] = create_text(v.value, 0.2);
+	v.inputs[0] = new InputBox(0, 0, 512, 32, "VARNAME", 225, 0, 0);
+	v.inputs[1] = new InputBox(0, 0, 228, 32, "BYTE", 225, 225, 0);
+	v.inputs[2] = new InputBox(0, 0, 540, 32, "?", 0, 225, 0);
 	vars.push_back(v);
-}
-
-void DataWindowManager::UpdateTextVar(Var* var)
-{
-	if(var->texture[el_edit_var] != 0)
-		SDL_DestroyTexture(var->texture[el_edit_var]);
-	switch (el_edit_var)
-	{
-	case 0:
-		var->texture[el_edit_var] = create_text(var->name, 0.2);
-		break;
-	case 1:
-		var->texture[el_edit_var] = create_text(get_string_vartype(var->var_type), 0.2);
-		break;
-	case 2:
-		var->texture[el_edit_var] = create_text(var->value, 0.2);
-		break;
-	}
 }

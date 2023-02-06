@@ -12,7 +12,10 @@ InputBox::InputBox(int x, int y, int w, int h, std::string start_text, int _r, i
 
 void InputBox::Draw()
 {
-	draw_text(Position.x, Position.y, Text_texture, r, g, b);
+	if(!Focus)
+		draw_text(Position.x, Position.y, Text_texture, r, g, b);
+	else
+		draw_text(Position.x, Position.y, Text_texture, r / 1.5, g / 1.5, b / 1.5);
 }
 
 std::string InputBox::Handler(SDL_Event& e)
@@ -21,6 +24,8 @@ std::string InputBox::Handler(SDL_Event& e)
 	{
 		Focus = true;
 	}
+	else if(e.type == SDL_MOUSEBUTTONDOWN)
+		Focus = false;
 
 	if (e.type == SDL_KEYDOWN && Focus)
 	{
@@ -37,6 +42,7 @@ std::string InputBox::Handler(SDL_Event& e)
 		if (non_special)
 			Text += c;
 
+		SDL_DestroyTexture(Text_texture);
 		Text_texture = create_text(Text, Size.y / 32 * 0.2f);
 	}
 	return Text;
