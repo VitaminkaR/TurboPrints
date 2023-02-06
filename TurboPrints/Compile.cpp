@@ -1,6 +1,7 @@
 #include "Compile.h"
 
 std::vector<Var> vars;
+int stack_size = 32;
 
 void compile()
 {
@@ -15,6 +16,10 @@ void compile()
 	std::string error;
 
 	// компиляция
+	// создание стэка
+	out << "stack_segment segment stack \"stack\"\n";
+	out << "db " << stack_size << " DUP(0)\n";
+	out << "stack_segment ends\n\n";
 	// компиляция data segment
 	out << "data_segment segment\n";
 	for (int i = 0; i < vars.size(); i++)
@@ -41,6 +46,13 @@ void compile()
 		out << std::endl;
 	}
 	out << "data_segment ends\n\n";
+	// компиляция кода
+	out << "code_segment segment\n";
+	out << "assume ss:stack_segment, ds:data_segment, cs:code_segment\n";
+	out << "begin:\n";
+
+	out << "code_segment ends\n";
+	out << "end begin";
 
 	if (error != "")
 		std::cout << "ERROR " + error << std::endl;

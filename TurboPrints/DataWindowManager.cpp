@@ -2,6 +2,8 @@
 
 extern SDL_Texture* textures[];
 extern std::vector<Var> vars;
+extern int stack_size;
+extern const int WIDTH;
 
 namespace DataWindowManager
 {
