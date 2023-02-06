@@ -13,16 +13,19 @@ namespace DataWindowManager
 	int el_edit_var; // какой элемент настраивает пользователь (0-2) по структуре переменной соответственно
 	std::string str_edit_type; // переменная для ввода типа
 	InputBox* stack_input_box;
+	SDL_Texture *stack_label;
 }
 
 void DataWindowManager::Init()
 {
 	stack_input_box = new InputBox(WIDTH - 200, 32, 200, 32, "stack size", 225, 0, 0);
+	stack_label = create_text("STACK SIZE", 0.25);
 }
 
 void DataWindowManager::Draw()
 {
 	render_texture(textures[4], gRenderer, add_var_button_pos.x, add_var_button_pos.y);
+	draw_text(WIDTH - 228, 0, stack_label, 225, 225, 225);
 	stack_input_box->Draw();
 	for (int i = -1 * list_offset; i < 20 - list_offset; i++)
 	{
