@@ -1,7 +1,7 @@
 #include "Compile.h"
 
 std::vector<Var> vars;
-int stack_size = 32;
+std::string stack_size = "32";
 
 void compile()
 {
@@ -18,7 +18,7 @@ void compile()
 	// компиляция
 	// создание стэка
 	out << "stack_segment segment stack \"stack\"\n";
-	out << "db " << stack_size << " DUP(0)\n";
+	out << "\tdb " + stack_size + " DUP(0)\n";
 	out << "stack_segment ends\n\n";
 	// компиляция data segment
 	out << "data_segment segment\n";

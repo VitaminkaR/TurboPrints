@@ -135,6 +135,7 @@
     <ClCompile Include="Content.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="DataWindowManager.cpp" />
+    <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="RenderText.cpp" />
@@ -148,6 +149,7 @@
     <ClInclude Include="Content.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="DataWindowManager.h" />
+    <ClInclude Include="InputBox.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="platform.h" />

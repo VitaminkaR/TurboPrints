@@ -2,7 +2,7 @@
 
 extern SDL_Texture* textures[];
 extern std::vector<Var> vars;
-extern int stack_size;
+extern std::string stack_size;
 extern const int WIDTH;
 
 namespace DataWindowManager
@@ -12,11 +12,18 @@ namespace DataWindowManager
 	int id_edit_var = -1;
 	int el_edit_var; // какой элемент настраивает пользователь (0-2) по структуре переменной соответственно
 	std::string str_edit_type; // переменная для ввода типа
+	InputBox *stack_input_box;
+}
+
+void DataWindowManager::Init()
+{
+	stack_input_box = new InputBox(WIDTH - 200, 32, 200, 32, "stack size", 225, 0, 0);
 }
 
 void DataWindowManager::Draw()
 {
 	render_texture(textures[4], gRenderer, add_var_button_pos.x, add_var_button_pos.y);
+	stack_input_box->Draw();
 	for (int i = -1 * list_offset; i < 20 - list_offset; i++)
 	{
 		if (i >= vars.size())
@@ -29,6 +36,8 @@ void DataWindowManager::Draw()
 
 void DataWindowManager::Event_Handle(SDL_Event& e)
 {
+	if(id_edit_var == -1)
+		stack_size = stack_input_box->Handler(e);
 	if (check_button(e, add_var_button_pos.x, add_var_button_pos.y, textures[4]))
 	{
 		AddVar();

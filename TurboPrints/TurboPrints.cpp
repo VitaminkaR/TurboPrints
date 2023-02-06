@@ -33,6 +33,8 @@ int SDL_main(int argc, char* argv[])
 	bool quit = false;
 	SDL_Event e;
 
+	DataWindowManager::Init();
+
 	// главный цикл
 	while (!quit)
 	{
