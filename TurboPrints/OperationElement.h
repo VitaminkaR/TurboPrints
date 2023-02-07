@@ -1,9 +1,11 @@
 #pragma once
 
 #include "platform.h"
+#include "InputBox.h"
 #include "RenderText.h"
 #include "Button.h"
-#include "Connector.h"
+
+struct Connector ;
 
 class OperationElement
 {
@@ -13,11 +15,17 @@ public:
 	bool IsMove;
 	SDL_Texture *OENameText;
 	std::vector<Connector*> Connectors;
+	std::vector<InputBox*> Inputs;
 	std::string Function;
 
 	OperationElement(int x, int y);
-	void BaseHandler(SDL_Event &e);
-	virtual void Handler(SDL_Event &e);
-	void BaseDraw();
-	virtual void Draw();
+	void Handler(SDL_Event &e);
+	void Draw();
+};
+
+struct Connector
+{
+	bool IsParent;
+	OperationElement* next;
+	OperationElement* _this;
 };

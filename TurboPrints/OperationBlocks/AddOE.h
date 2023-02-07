@@ -10,9 +10,7 @@ public:
 	{
 		OENameText = create_text("BEGIN", 0.1f);
 		Connectors.push_back(new Connector());
-		Connectors.push_back(new Connector());
-		Connectors.at(0)->OElement = (OperationElement*)this;
-		Connectors.at(1)->OElement = (OperationElement*)this;
+		Connectors.push_back(new Connector());;
 		Function = "ad";
 	}
 

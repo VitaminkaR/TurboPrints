@@ -143,7 +143,6 @@
     <ClCompile Include="OperationBlocks\RegisterOE.cpp" />
     <ClCompile Include="OperationElement.cpp" />
     <ClCompile Include="RenderText.cpp" />
-    <ClCompile Include="Connector.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WindowPanel.cpp" />
@@ -152,7 +151,6 @@
     <ClInclude Include="OperationBlocks\BeginOE.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Compile.h" />
-    <ClInclude Include="Connector.h" />
     <ClInclude Include="Content.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="DataWindowManager.h" />

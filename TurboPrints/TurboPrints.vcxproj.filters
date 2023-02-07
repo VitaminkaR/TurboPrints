@@ -54,9 +54,6 @@
     <ClCompile Include="OperationElement.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Connector.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="OperationBlocks\AddOE.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -102,9 +99,6 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OperationElement.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Connector.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OperationBlocks\AddOE.h">
