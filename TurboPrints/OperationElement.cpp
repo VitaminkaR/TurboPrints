@@ -5,16 +5,6 @@ extern SDL_Renderer* gRenderer;
 
 std::vector<OperationElement*> oelements;
 
-OperationElement* create_operation_element(int x, int y, int type)
-{
-	switch (type)
-	{
-	case 0:
-		return 0;
-		break;
-	}
-}
-
 OperationElement::OperationElement(int x, int y)
 {
 	Position = { x, y };

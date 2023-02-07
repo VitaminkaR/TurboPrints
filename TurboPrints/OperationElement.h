@@ -12,6 +12,8 @@ public:
 	Vector2 MoveOffset;
 	bool IsMove;
 	SDL_Texture *OENameText;
+	std::vector<Connector*> Connectors;
+	std::string Function;
 
 	OperationElement(int x, int y);
 	void BaseHandler(SDL_Event &e);
@@ -19,7 +21,3 @@ public:
 	void BaseDraw();
 	virtual void Draw();
 };
-
-// происходит регистрация элементов (при добавлении нового элемента, прописать его здесь)
-// цифра элемента, это ай ди кнопки в ControlPanel, поэтому они должны быть строго согласованы
-OperationElement* create_operation_element(int x, int y, int type);

@@ -6,7 +6,7 @@
 #include "DataWindowManager.h"
 #include "RenderText.h"
 #include "KeyboardHandler.h"
-#include "OperationElement.h"
+#include "OperationBlocks/RegisterOE.h"
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
@@ -22,7 +22,7 @@ SDL_Surface* gScreenSurface = NULL;
 SDL_Renderer* gRenderer = NULL;												// основной рендер
 
 extern std::vector<OperationElement*> oelements;
-extern BeginOE* start_point;
+extern OperationElement* start_point;
 
 bool init();													// инициализация программы
 void close();													// отчистка данных (это может и ОС делать)
@@ -59,15 +59,14 @@ int SDL_main(int argc, char* argv[])
 			{
 				ControlPanel::Event_Handle(e);
 				Menu::Event_Handle(e);
+				for (int i = 0; i < oelements.size(); i++)
+				{
+					oelements.at(i)->Handler(e);
+				}
 			}
 			if (WindowPanel::Get_Mode() == 1)
 			{
 				DataWindowManager::Event_Handle(e);
-			}	
-
-			for (int i = 0; i < oelements.size(); i++)
-			{
-				oelements.at(i)->Handler(e);
 			}
 		}
 
@@ -79,14 +78,14 @@ int SDL_main(int argc, char* argv[])
 		{
 			ControlPanel::Draw();
 			Menu::Draw();
+			for (int i = 0; i < oelements.size(); i++)
+			{
+				oelements.at(i)->Draw();
+			}
 		}
 		if (WindowPanel::Get_Mode() == 1)
 		{
 			DataWindowManager::Draw();
-		}
-		for (int i = 0; i < oelements.size(); i++)
-		{
-			oelements.at(i)->Draw();
 		}
 
 		SDL_RenderPresent(gRenderer);

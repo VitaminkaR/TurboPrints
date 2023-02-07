@@ -55,7 +55,7 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 		if (list_offset > 0)
 			list_offset = 0;
 		if (list_offset * -1 >= vars.size() - 5)
-			list_offset = (vars.size() - 5) * -1;
+			list_offset = ((int)vars.size() - 5) * -1;
 	}
 
 	// выбор редактирования переменных и их удаление

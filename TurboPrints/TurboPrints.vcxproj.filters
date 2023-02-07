@@ -63,6 +63,9 @@
     <ClCompile Include="OperationBlocks\BeginOE.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="OperationBlocks\RegisterOE.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.h">
@@ -108,6 +111,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OperationBlocks\BeginOE.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationBlocks\RegisterOE.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
