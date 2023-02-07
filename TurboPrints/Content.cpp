@@ -14,6 +14,8 @@ void load_content()
 	textures[2] = load_image(gRenderer, "./Resource/images/compile_button.png");
 	textures[3] = load_image(gRenderer, "./Resource/images/window_panel.png");
 	textures[4] = load_image(gRenderer, "./Resource/images/add_var_button.png");
+	textures[5] = load_image(gRenderer, "./Resource/images/block.png");
+	textures[6] = load_image(gRenderer, "./Resource/images/connector.png");
 }
 
 void unload_content()
@@ -42,4 +44,15 @@ void render_texture(SDL_Texture* _texture, SDL_Renderer* _renderer, int x, int y
 	dst.y = y;
 	SDL_QueryTexture(_texture, 0, 0, &dst.w, &dst.h);
 	SDL_RenderCopy(_renderer, _texture, NULL, &dst);
+}
+
+void render_texture(SDL_Texture* _texture, SDL_Renderer* _renderer, int x, int y, int r, int g, int b)
+{
+	SDL_Rect dst;
+	dst.x = x;
+	dst.y = y;
+	SDL_SetTextureColorMod(_texture, r, g, b);
+	SDL_QueryTexture(_texture, 0, 0, &dst.w, &dst.h);
+	SDL_RenderCopy(_renderer, _texture, NULL, &dst);
+	SDL_SetTextureColorMod(_texture, 255, 255, 255);
 }

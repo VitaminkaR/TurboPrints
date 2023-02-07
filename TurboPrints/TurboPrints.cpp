@@ -6,6 +6,7 @@
 #include "DataWindowManager.h"
 #include "RenderText.h"
 #include "KeyboardHandler.h"
+#include "OperationElement.h"
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
@@ -19,6 +20,8 @@ const int FRAMES = 15;
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 SDL_Renderer* gRenderer = NULL;												// основной рендер
+
+extern std::vector<OperationElement*> oelements;
 
 bool init();													// инициализация программы
 void close();													// отчистка данных (это может и ОС делать)
@@ -34,6 +37,9 @@ int SDL_main(int argc, char* argv[])
 	SDL_Event e;
 
 	DataWindowManager::Init();
+
+	// debug
+	OperationElement *oe = new OperationElement(100, 100);
 
 	// главный цикл
 	while (!quit)
@@ -57,6 +63,11 @@ int SDL_main(int argc, char* argv[])
 			{
 				DataWindowManager::Event_Handle(e);
 			}	
+
+			for (int i = 0; i < oelements.size(); i++)
+			{
+				oelements.at(i)->Handler(e);
+			}
 		}
 
 		SDL_SetRenderDrawColor(gRenderer, 100, 100, 100, 0xFF);
@@ -71,6 +82,10 @@ int SDL_main(int argc, char* argv[])
 		if (WindowPanel::Get_Mode() == 1)
 		{
 			DataWindowManager::Draw();
+		}
+		for (int i = 0; i < oelements.size(); i++)
+		{
+			oelements.at(i)->Draw();
 		}
 
 		SDL_RenderPresent(gRenderer);

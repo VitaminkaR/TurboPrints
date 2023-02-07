@@ -138,7 +138,10 @@
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="OperationBlocks\AddOE.cpp" />
+    <ClCompile Include="OperationElement.cpp" />
     <ClCompile Include="RenderText.cpp" />
+    <ClCompile Include="Connector.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WindowPanel.cpp" />
@@ -146,12 +149,15 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Compile.h" />
+    <ClInclude Include="Connector.h" />
     <ClInclude Include="Content.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="DataWindowManager.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="OperationBlocks\AddOE.h" />
+    <ClInclude Include="OperationElement.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="RenderText.h" />
     <ClInclude Include="Utils.h" />
