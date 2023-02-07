@@ -139,6 +139,7 @@
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="OperationBlocks\AddOE.cpp" />
+    <ClCompile Include="OperationBlocks\BeginOE.cpp" />
     <ClCompile Include="OperationElement.cpp" />
     <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="Connector.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="WindowPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="OperationBlocks\BeginOE.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Compile.h" />
     <ClInclude Include="Connector.h" />

@@ -2,6 +2,7 @@
 
 std::vector<Var> vars;
 std::string stack_size = "32";
+BeginOE* start_point;
 
 void compile()
 {

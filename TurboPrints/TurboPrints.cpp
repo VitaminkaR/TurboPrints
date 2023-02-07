@@ -22,6 +22,7 @@ SDL_Surface* gScreenSurface = NULL;
 SDL_Renderer* gRenderer = NULL;												// основной рендер
 
 extern std::vector<OperationElement*> oelements;
+extern BeginOE* start_point;
 
 bool init();													// инициализация программы
 void close();													// отчистка данных (это может и ОС делать)
@@ -39,7 +40,7 @@ int SDL_main(int argc, char* argv[])
 	DataWindowManager::Init();
 
 	// debug
-	OperationElement *oe = new OperationElement(100, 100);
+	start_point = new BeginOE(100, 100);
 
 	// главный цикл
 	while (!quit)

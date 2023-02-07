@@ -3,6 +3,7 @@
 #include "platform.h"
 #include "RenderText.h"
 #include "Button.h"
+#include "Connector.h"
 
 class OperationElement
 {
@@ -13,7 +14,9 @@ public:
 	SDL_Texture *OENameText;
 
 	OperationElement(int x, int y);
-	void Handler(SDL_Event &e);
+	void BaseHandler(SDL_Event &e);
+	virtual void Handler(SDL_Event &e);
+	void BaseDraw();
 	virtual void Draw();
 };
 

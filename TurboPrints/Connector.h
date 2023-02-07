@@ -2,7 +2,6 @@
 
 #include "platform.h"
 #include "Button.h"
-#include "OperationElement.h"
 #include "Content.h"
 
 class Connector
@@ -12,12 +11,10 @@ public:
 	// объект с которым этот коннектор соединен
 	Connector *Unite;
 	// операционный элемент часть которого является текущий коннектор
-	OperationElement *OElement;
+	void *OElement;
 	// является ли родителем (т е хочет ли соединится) (для графики)
-	bool isParent;
+	bool IsParent;
 	
-	// позиция x и y задается относительно операционного элемента
-	Connector(int x, int y, OperationElement *element);
 	void Draw();
 	void Handler(SDL_Event &e);
 };

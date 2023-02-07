@@ -5,15 +5,9 @@ extern SDL_Renderer* gRenderer;
 
 Connector *parent = 0;
 
-Connector::Connector(int x, int y, OperationElement* element)
-{
-	OElement = element;
-	Position = { OElement->Position.x + x, OElement->Position.y + y};
-}
-
 void Connector::Draw()
 {
-	if(!isParent)
+	if(!IsParent)
 		render_texture(textures[6], gRenderer, Position.x, Position.y);
 	else
 		render_texture(textures[6], gRenderer, Position.x, Position.y, 225, 0, 0);
@@ -26,6 +20,7 @@ void Connector::Handler(SDL_Event& e)
 		if(parent == 0)
 		{
 			parent = this;
+			IsParent = true;
 		}
 		else
 		{
@@ -33,11 +28,12 @@ void Connector::Handler(SDL_Event& e)
 			this->Unite = parent;
 			parent->Unite = this;
 			parent = 0;
+			IsParent = false;
 		}
 	}
 	else if (e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
 	{
-		isParent = false;
+		IsParent = false;
 		parent = 0;
 	}
 }
