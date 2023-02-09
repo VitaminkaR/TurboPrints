@@ -82,17 +82,6 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 		{
 			vars.erase(vars.begin() + id_edit_var);
 		}
-		//// смотрим что конкретно будет настраивать пользователь
-		//if (e.button.button == SDL_BUTTON_LEFT && id_edit_var > -1)
-		//{
-		//	if(mpos.x < 512)
-		//		el_edit_var = 0;
-		//	else if (mpos.x > 740)
-		//		el_edit_var = 2;
-		//	else
-		//		el_edit_var = 1;
-		//	std::cout << " - " << el_edit_var << std::endl;
-		//}
 	}
 
 	if (id_edit_var != -1)

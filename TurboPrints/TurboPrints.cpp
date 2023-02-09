@@ -38,6 +38,7 @@ int SDL_main(int argc, char* argv[])
 	SDL_Event e;
 
 	DataWindowManager::Init();
+	ControlPanel::Init();
 
 	// debug
 	start_point = new BeginOE(100, 100);

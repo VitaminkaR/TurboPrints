@@ -4,6 +4,12 @@ extern const int HEIGHT;
 extern SDL_Renderer* gRenderer;
 extern SDL_Texture* textures[];
 
+// отрисовка операционных элементов
+extern ElementType element_types[];
+extern const int OETYPES_COUNT;
+std::vector<SDL_Texture*> oe_text_textures;
+
+
 namespace ControlPanel
 {
 	Vector2 call_button_pos = { WIDTH - 32, 0 };
@@ -11,6 +17,14 @@ namespace ControlPanel
 	int list_offset;
 	bool focus; // если курсор внутри области панели
 	bool isShow = false;
+}
+
+void ControlPanel::Init()
+{
+	for (int i = 0; i < OETYPES_COUNT; i++)
+	{
+		oe_text_textures.push_back(create_text(element_types[i].name, 0.2));
+	}
 }
 
 void ControlPanel::Draw()
@@ -23,11 +37,48 @@ void ControlPanel::Draw()
 		SDL_RenderFillRect(gRenderer, &fillRect);
 
 		// отрисовка кнопок
+		for (int i = 0; i < OETYPES_COUNT; i++)
+		{
+			draw_text(WIDTH - WIDTH / 5 + 8, (i + list_offset) * 32 + 32, oe_text_textures[i], 225, 0, 0);
+		}
 	}
 }
 
 void ControlPanel::Event_Handle(SDL_Event& e)
 {
+	if (isShow)
+	{
+		if (IntersectRectPoint(WIDTH - WIDTH / 5, 0, e.button.x, e.button.y, WIDTH / 5, HEIGHT))
+		{
+			focus = true;
+			if (e.type == SDL_MOUSEBUTTONDOWN)
+			{
+				int ofs = e.button.y - 32;
+				int id = ofs / 32;
+				if(ofs < 0)
+					id -= 1;
+				id -= list_offset;
+				
+				// нашли id ое и создаем его
+				create_operation_element(id);
+			}
+		}
+		else
+		{
+			// если мышка не пересеклась с областью панели именно в момент её(курсора) перемещения
+			if (e.type == 1024)
+				focus = false;
+		}
+		if (e.type == SDL_MOUSEWHEEL && focus)
+		{
+			list_offset += e.wheel.y;
+			if (list_offset > 0)
+				list_offset = 0;
+			if (list_offset * -1 >= OETYPES_COUNT + 1)
+				list_offset = OETYPES_COUNT * -1;
+		}
+	}
+
 	if (check_button(e, call_button_pos.x, call_button_pos.y, textures[1]))
 	{
 		if (isShow)
@@ -40,25 +91,5 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 			call_button_pos.x = WIDTH - WIDTH / 5 - 32;
 			isShow = true;
 		}
-	}
-
-	if (isShow)
-	{
-		if (IntersectRectPoint(WIDTH - WIDTH / 5, 0, e.button.x, e.button.y, WIDTH / 5, HEIGHT))
-		{
-			focus = true;
-		}
-		else
-		{
-			// если мышка не пересеклась с областью панели именно в момент её(курсора) перемещения
-			if(e.type == 1024)
-				focus = false;
-		}	
-		if (e.type == SDL_MOUSEWHEEL && focus)
-		{
-			list_offset += e.wheel.y;
-			std::cout << list_offset << std::endl;
-		}
-
 	}
 }

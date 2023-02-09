@@ -8,7 +8,7 @@ class AddOE : public OperationElement
 public:
 	AddOE(int x, int y) : OperationElement(x, y)
 	{
-		OENameText = create_text("BEGIN", 0.1f);
+		OENameText = create_text("ADD", 0.1f);
 		Connectors.push_back(new Connector());
 		Connectors.push_back(new Connector());;
 		Function = "ad";
