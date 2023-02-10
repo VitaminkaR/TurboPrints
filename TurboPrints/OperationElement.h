@@ -16,15 +16,16 @@ public:
 	SDL_Texture *OENameText;
 	std::vector<Connector*> Connectors;
 	std::vector<InputBox*> Inputs;
-	std::string Function;
 
 	OperationElement(int x, int y);
 	void Handler(SDL_Event &e);
 	void Draw();
+	virtual void CompileBlock() = 0;
 };
 
 struct Connector
 {
+	bool input;
 	bool IsParent;
 	OperationElement* next;
 	OperationElement* _this;

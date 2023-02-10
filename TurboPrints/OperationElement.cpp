@@ -18,7 +18,7 @@ void OperationElement::Handler(SDL_Event& e)
 	for (int i = 0; i < Connectors.size(); i++)
 	{
 		Connector *con = Connectors.at(i);
-		if (check_button(e, Position.x + 256 - 8, Position.y + 8 + i * 32, 32, 32) && e.button.button == SDL_BUTTON_LEFT)
+		if (check_button(e, !(con->input) ? Position.x + 256 - 16 : Position.x + 16, Position.y + 8 + i * 32, 32, 32) && e.button.button == SDL_BUTTON_LEFT)
 		{
 			if (parent == 0)
 			{
@@ -61,6 +61,6 @@ void OperationElement::Draw()
 
 	for (int i = 0; i < Connectors.size(); i++)
 	{
-		render_texture(textures[6], gRenderer, Position.x + 256 - 16, Position.y + 8 + i * 32, 255, (Connectors.at(i)->IsParent) ? 0 : 255, (Connectors.at(i)->IsParent) ? 0 : 255);
+		render_texture(textures[6], gRenderer, (!Connectors.at(i)->input) ? Position.x + 256 - 16 : Position.x - 16, Position.y + 8 + i * 32, 255, (Connectors.at(i)->IsParent) ? 0 : 255, (Connectors.at(i)->IsParent) ? 0 : 255);
 	}
 }
