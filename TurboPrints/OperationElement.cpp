@@ -18,7 +18,7 @@ void OperationElement::Handler(SDL_Event& e)
 	for (int i = 0; i < Connectors.size(); i++)
 	{
 		Connector *con = Connectors.at(i);
-		if (check_button(e, !(con->input) ? Position.x + 256 - 16 : Position.x + 16, Position.y + 8 + i * 32, 32, 32) && e.button.button == SDL_BUTTON_LEFT)
+		if (check_button(e, !(con->input) ? Position.x + 256 - 16 : Position.x - 16, Position.y + 8 + i * 32, 32, 32) && e.button.button == SDL_BUTTON_LEFT)
 		{
 			if (parent == 0)
 			{

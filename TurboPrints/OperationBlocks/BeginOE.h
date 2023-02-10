@@ -10,9 +10,9 @@ public:
 	{
 		OENameText = create_text("BEGIN", 0.1f);
 		Connectors.push_back(new Connector());
-		Function = "start_point";
 	}
 
 	void Handler(SDL_Event &e);
 	void Draw();
+	void CompileBlock();
 };
