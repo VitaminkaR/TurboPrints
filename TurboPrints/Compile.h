@@ -2,6 +2,7 @@
 
 #include "platform.h"
 #include "InputBox.h"
+#include "OperationBlocks/CreateOperationBlock.h"
 
 void compile();
 

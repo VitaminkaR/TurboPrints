@@ -3,6 +3,8 @@
 std::vector<Var> vars;
 std::string stack_size = "32";
 
+extern std::vector<OperationBlock*> oelements;
+
 void compile()
 {
 	std::cout << "Start compile" << std::endl;
@@ -50,6 +52,18 @@ void compile()
 	out << "code_segment segment\n";
 	out << "assume ss:stack_segment, ds:data_segment, cs:code_segment\n";
 	out << "begin:\n";
+
+	OperationBlock *start = oelements.at(0);
+	OperationBlock *current_block = (OperationBlock*)start->BaseOutputConnector->OtherConnector->ParentObject;
+	Connector* current_connector;
+	while (true)
+	{
+		current_block->CompileBlock(out);
+		current_connector = current_block->BaseOutputConnector;
+		if (current_connector->OtherConnector == 0)
+			break;
+		current_block = (OperationBlock*)current_connector->OtherConnector->ParentObject;
+	}
 
 	out << "code_segment ends\n";
 	out << "end begin";

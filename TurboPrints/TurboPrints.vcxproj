@@ -139,7 +139,10 @@
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="OperationBlocks\CreateOperationBlock.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlock.cpp" />
+    <ClCompile Include="OperationBlocks\OperationBlockAdd.cpp" />
+    <ClCompile Include="OperationBlocks\OperationBlockBegin.cpp" />
     <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -155,7 +158,10 @@
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="OperationBlocks\CreateOperationBlock.h" />
     <ClInclude Include="OperationBlocks\OperationBlock.h" />
+    <ClInclude Include="OperationBlocks\OperationBlockAdd.h" />
+    <ClInclude Include="OperationBlocks\OperationBlockBegin.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="RenderText.h" />
     <ClInclude Include="Utils.h" />

@@ -42,10 +42,10 @@ void ControlPanel::Draw()
 		{
 			draw_text(WIDTH - WIDTH / 5 + 8, (i + list_offset) * 32 + 32, oe_text_textures[i], 225, 0, 0);
 		}
-		for (int i = 0; i < oelements.size(); i++)
-		{
-			oelements.at(i)->Draw();
-		}
+	}
+	for (int i = 0; i < oelements.size(); i++)
+	{
+		oelements.at(i)->BaseDraw();
 	}
 }
 
@@ -100,6 +100,6 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 
 	for (int i = 0; i < oelements.size(); i++)
 	{
-		oelements.at(i)->Handler(e);
+		oelements.at(i)->BaseHandler(e);
 	}
 }

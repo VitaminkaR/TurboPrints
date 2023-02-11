@@ -57,6 +57,15 @@
     <ClCompile Include="OperationBlocks\Connector.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="OperationBlocks\OperationBlockAdd.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationBlocks\CreateOperationBlock.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationBlocks\OperationBlockBegin.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.h">
@@ -96,6 +105,15 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OperationBlocks\Connector.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationBlocks\OperationBlockAdd.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationBlocks\OperationBlockBegin.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationBlocks\CreateOperationBlock.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

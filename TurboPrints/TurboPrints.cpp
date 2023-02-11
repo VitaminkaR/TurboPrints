@@ -20,6 +20,8 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 SDL_Renderer* gRenderer = NULL;												// основной рендер
 
+extern std::vector<OperationBlock*> oelements;
+
 bool init();													// инициализация программы
 void close();													// отчистка данных (это может и ОС делать)
 
@@ -35,6 +37,8 @@ int SDL_main(int argc, char* argv[])
 
 	DataWindowManager::Init();
 	ControlPanel::Init();
+
+	oelements.push_back(new OperationBlockBegin());
 
 	// главный цикл
 	while (!quit)

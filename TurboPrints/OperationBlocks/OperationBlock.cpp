@@ -19,11 +19,11 @@ OperationBlock::OperationBlock()
 	Size = {256, 128};
 	oelements.push_back(this);
 
-	input = new Connector((OperationBlock*)this);
-	output = new Connector((OperationBlock*)this);
+	BaseInputConnector = new Connector((OperationBlock*)this);
+	BaseOutputConnector = new Connector((OperationBlock*)this);
 }
 
-void OperationBlock::Handler(SDL_Event& e)
+void OperationBlock::BaseHandler(SDL_Event& e)
 {
 	if (!once_move && check_button(e, Position.x, Position.y, Size.x, Size.y) && e.button.button == SDL_BUTTON_LEFT)
 	{
@@ -41,11 +41,13 @@ void OperationBlock::Handler(SDL_Event& e)
 		Position = {e.button.x - MoveOffset.x, e.button.y - MoveOffset.y};
 	}
 
-	input->Handler(e, {Position.x + Size.x / 2 - 8, Position.y - 8});
-	output->Handler(e, { Position.x + Size.x / 2 - 8, Position.y  + Size.y - 8});
+	BaseInputConnector->Handler(e, {Position.x + Size.x / 2 - 8, Position.y - 8});
+	BaseOutputConnector->Handler(e, { Position.x + Size.x / 2 - 8, Position.y  + Size.y - 8});
+
+	Handler(e);
 }
 
-void OperationBlock::Draw()
+void OperationBlock::BaseDraw()
 {
 	SDL_Rect outlineRect = { Position.x, Position.y, Size.x, Size.y };
 	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -53,17 +55,9 @@ void OperationBlock::Draw()
 	SDL_RenderFillRect(gRenderer, &outlineRect);
 	draw_text(Position.x + 8, Position.y + 8, TitleText, 0, 0, 0);
 
-	input->Draw();
-	output->Draw();
+	BaseInputConnector->Draw();
+	BaseOutputConnector->Draw();
+
+	Draw();
 }
 
-void create_opeartion_block(int id)
-{
-	switch (id)
-	{
-	case 0:
-		OperationBlock *b = new OperationBlock();
-		b->IsMove = true;
-		break;
-	}
-}
