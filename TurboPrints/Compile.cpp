@@ -19,38 +19,38 @@ void compile()
 
 	// компиляция
 	// создание стэка
-	out << "stack_segment segment stack \"stack\"\n";
-	out << "\tdb " + stack_size + " DUP(0)\n";
-	out << "stack_segment ends\n\n";
+	out << "stack_segment SEGMENT STACK \"stack\"\n";
+	out << "\tDB " << stack_size << " DUP(0)\n";
+	out << "stack_segment ENDS\n\n";
 	// компиляция data segment
-	out << "data_segment segment\n";
+	out << "data_segment SEGMENT\n";
 	for (int i = 0; i < vars.size(); i++)
 	{
 		out << '\t' << vars[i].name << " ";
 		switch (vars[i].var_type)
 		{
 		case INT:
-			out << "dd " << (vars[i].value == "") ? "?" : vars[i].value;
+			out << "DD " << (vars[i].value == "") ? "?" : vars[i].value;
 			break;
 		case SHORT:
-			out << "dw " << (vars[i].value == "") ? "?" : vars[i].value;
+			out << "DW " << (vars[i].value == "") ? "?" : vars[i].value;
 			break;
 		case BYTE:
-			out << "db " << (vars[i].value == "") ? "?" : vars[i].value;
+			out << "DB " << (vars[i].value == "") ? "?" : vars[i].value;
 			break;
 		case ARRAY:
-			out << "dd " << vars[i].value;
+			out << "DD " << vars[i].value;
 			break;
 		case STRING:
-			out << "db '" << vars[i].value << "'";
+			out << "DB '" << vars[i].value << "'";
 			break;
 		}
 		out << std::endl;
 	}
-	out << "data_segment ends\n\n";
+	out << "data_segment ENDS\n\n";
 	// компиляция кода
-	out << "code_segment segment\n";
-	out << "assume ss:stack_segment, ds:data_segment, cs:code_segment\n";
+	out << "code_segment SEGMENT\n";
+	out << "ASSUME ss:stack_segment, ds:data_segment, cs:code_segment\n";
 	out << "begin:\n";
 
 	OperationBlock *start = oelements.at(0);
@@ -65,8 +65,8 @@ void compile()
 		current_block = (OperationBlock*)current_connector->OtherConnector->ParentObject;
 	}
 
-	out << "code_segment ends\n";
-	out << "end begin";
+	out << "code_segment ENDS\n";
+	out << "END begin";
 
 	if (error != "")
 		std::cout << "ERROR " + error << std::endl;
