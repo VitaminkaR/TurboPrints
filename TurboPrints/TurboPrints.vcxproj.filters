@@ -51,7 +51,10 @@
     <ClCompile Include="InputBox.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="OperationBlock.cpp">
+    <ClCompile Include="OperationBlocks\OperationBlock.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationBlocks\Connector.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,7 +92,10 @@
     <ClInclude Include="InputBox.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="OperationBlock.h">
+    <ClInclude Include="OperationBlocks\OperationBlock.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationBlocks\Connector.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

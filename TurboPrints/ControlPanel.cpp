@@ -65,7 +65,7 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 				id -= list_offset;
 				
 				// нашли id ое и создаем его
-				//create_operation_element(id);
+				create_opeartion_block(id);
 			}
 		}
 		else

@@ -1,9 +1,8 @@
 #pragma once
 
-#include "platform.h"
-#include "InputBox.h"
-#include "RenderText.h"
-#include "Button.h"
+#include "Connector.h"
+#include "../InputBox.h"
+#include "../RenderText.h"
 
 const int TYPES_COUNT = 2;
 
@@ -16,17 +15,13 @@ public:
 	bool IsMove;
 	SDL_Texture *TitleText;
 
+	Connector *input;
+	Connector *output;
+
 	OperationBlock();
 	void Handler(SDL_Event &e);
 	void Draw();
 	//virtual void CompileBlock() = 0;
 };
 
-void create_opeartion_block(int id)
-{
-	switch (id)
-	{
-	case 0:
-		break;
-	}
-}
+void create_opeartion_block(int id);

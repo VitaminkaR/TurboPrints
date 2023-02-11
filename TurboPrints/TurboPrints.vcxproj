@@ -132,13 +132,14 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Compile.cpp" />
+    <ClCompile Include="OperationBlocks\Connector.cpp" />
     <ClCompile Include="Content.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="DataWindowManager.cpp" />
     <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="KeyboardHandler.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="OperationBlock.cpp" />
+    <ClCompile Include="OperationBlocks\OperationBlock.cpp" />
     <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -147,13 +148,14 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Compile.h" />
+    <ClInclude Include="OperationBlocks\Connector.h" />
     <ClInclude Include="Content.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="DataWindowManager.h" />
     <ClInclude Include="InputBox.h" />
     <ClInclude Include="KeyboardHandler.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="OperationBlock.h" />
+    <ClInclude Include="OperationBlocks\OperationBlock.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="RenderText.h" />
     <ClInclude Include="Utils.h" />

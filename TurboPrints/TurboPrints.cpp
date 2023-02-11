@@ -6,7 +6,6 @@
 #include "DataWindowManager.h"
 #include "RenderText.h"
 #include "KeyboardHandler.h"
-#include "OperationBlock.h"
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
