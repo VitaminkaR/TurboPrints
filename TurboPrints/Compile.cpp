@@ -52,6 +52,7 @@ void compile()
 	out << "code_segment SEGMENT\n";
 	out << "ASSUME ss:stack_segment, ds:data_segment, cs:code_segment\n";
 	out << "begin:\n";
+	out << "MOV ax, data_segment\nMOV ds, ax\n\n";
 
 	OperationBlock *start = oelements.at(0);
 	OperationBlock *current_block = (OperationBlock*)start->BaseOutputConnector->OtherConnector->ParentObject;
