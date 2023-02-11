@@ -5,17 +5,19 @@ stack_segment SEGMENT STACK "stack"
 stack_segment ENDS
 
 data_segment SEGMENT
-	num DB 0
-	hey DB 'lol'
 data_segment ENDS
 
 code_segment SEGMENT
 ASSUME ss:stack_segment, ds:data_segment, cs:code_segment
 begin:
-MOV ax, data_segment
-MOV ds, ax
+	MOV ax, data_segment
+	MOV ds, ax
 
-ADD num, 5
-ADD hey, 32
+	ADD , 
+
+EXIT:
+	MOV ah, 4Ch
+	INT 21h
+
 code_segment ENDS
 END begin

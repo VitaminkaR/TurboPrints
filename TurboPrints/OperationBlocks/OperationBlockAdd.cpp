@@ -2,7 +2,7 @@
 
 void OperationBlockAdd::CompileBlock(std::ofstream& out)
 {
-	out << "ADD " << FirstOperand->Text << ", " << SecondOperand->Text << std::endl; 
+	out << "\tADD " << FirstOperand->Text << ", " << SecondOperand->Text << std::endl; 
 }
 
 void OperationBlockAdd::Handler(SDL_Event& e)
