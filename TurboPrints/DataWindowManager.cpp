@@ -91,6 +91,9 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 		vars.at(id_edit_var).var_type = get_vartype_string(str);
 		vars.at(id_edit_var).value = vars.at(id_edit_var).inputs[2]->Handler(e);
 	}
+
+	if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN)
+		id_edit_var = -1;
 }
 
 void DataWindowManager::AddVar()
