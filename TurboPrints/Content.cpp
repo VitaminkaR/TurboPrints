@@ -14,8 +14,6 @@ void load_content()
 	textures[2] = load_image(gRenderer, "./Resource/images/compile_button.png");
 	textures[3] = load_image(gRenderer, "./Resource/images/window_panel.png");
 	textures[4] = load_image(gRenderer, "./Resource/images/add_var_button.png");
-	textures[5] = load_image(gRenderer, "./Resource/images/block.png");
-	textures[6] = load_image(gRenderer, "./Resource/images/connector.png");
 }
 
 void unload_content()

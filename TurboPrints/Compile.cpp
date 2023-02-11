@@ -2,7 +2,6 @@
 
 std::vector<Var> vars;
 std::string stack_size = "32";
-OperationElement * start_point;
 
 void compile()
 {

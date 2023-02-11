@@ -5,10 +5,11 @@ extern SDL_Renderer* gRenderer;
 extern SDL_Texture* textures[];
 
 // отрисовка операционных элементов
-extern ElementType element_types[];
-extern const int OETYPES_COUNT;
+extern std::string operation_types[];
+extern const int TYPES_COUNT;
 std::vector<SDL_Texture*> oe_text_textures;
 
+extern std::vector<OperationBlock*> oelements;
 
 namespace ControlPanel
 {
@@ -21,9 +22,9 @@ namespace ControlPanel
 
 void ControlPanel::Init()
 {
-	for (int i = 0; i < OETYPES_COUNT; i++)
+	for (int i = 0; i < TYPES_COUNT; i++)
 	{
-		oe_text_textures.push_back(create_text(element_types[i].name, 0.2));
+		oe_text_textures.push_back(create_text(operation_types[i], 0.2));
 	}
 }
 
@@ -37,9 +38,13 @@ void ControlPanel::Draw()
 		SDL_RenderFillRect(gRenderer, &fillRect);
 
 		// отрисовка кнопок
-		for (int i = 0; i < OETYPES_COUNT; i++)
+		for (int i = 0; i < TYPES_COUNT; i++)
 		{
 			draw_text(WIDTH - WIDTH / 5 + 8, (i + list_offset) * 32 + 32, oe_text_textures[i], 225, 0, 0);
+		}
+		for (int i = 0; i < oelements.size(); i++)
+		{
+			oelements.at(i)->Draw();
 		}
 	}
 }
@@ -60,7 +65,7 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 				id -= list_offset;
 				
 				// нашли id ое и создаем его
-				create_operation_element(id);
+				//create_operation_element(id);
 			}
 		}
 		else
@@ -74,8 +79,8 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 			list_offset += e.wheel.y;
 			if (list_offset > 0)
 				list_offset = 0;
-			if (list_offset * -1 >= OETYPES_COUNT + 1)
-				list_offset = OETYPES_COUNT * -1;
+			if (list_offset * -1 >= TYPES_COUNT + 1)
+				list_offset = TYPES_COUNT * -1;
 		}
 	}
 
@@ -91,5 +96,10 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 			call_button_pos.x = WIDTH - WIDTH / 5 - 32;
 			isShow = true;
 		}
+	}
+
+	for (int i = 0; i < oelements.size(); i++)
+	{
+		oelements.at(i)->Handler(e);
 	}
 }
