@@ -5,6 +5,7 @@ stack_segment SEGMENT STACK "stack"
 stack_segment ENDS
 
 data_segment SEGMENT
+	num DB 0
 data_segment ENDS
 
 code_segment SEGMENT
@@ -13,7 +14,8 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	ADD num, 6
+	ADD num, 3
+	SUB num, 2
 
 EXIT:
 	MOV ah, 4Ch

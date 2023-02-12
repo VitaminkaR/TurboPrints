@@ -8,8 +8,12 @@ void create_opeartion_block(int id)
 	case 0:
 		b = new OperationBlockAdd();
 		break;
+	case 1:
+		b = new OperationBlockSub();
+		break;
 	}
 	b->IsMove = true;
+	b->MoveOffset = {b->Size.x / 2, b->Size.y / 2};
 }
 
 void compile_branch(OperationBlock* block, std::ofstream &out)
