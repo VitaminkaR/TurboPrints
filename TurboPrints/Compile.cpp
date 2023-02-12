@@ -36,7 +36,7 @@ void compile()
 			out << "DW " << (vars[i].value == "") ? "?" : vars[i].value;
 			break;
 		case BYTE:
-			out << "DB " << (vars[i].value == "") ? "?" : vars[i].value;
+			out << "DB " << ((vars[i].value == "") ? "?" : vars[i].value);
 			break;
 		case ARRAY:
 			out << "DD " << vars[i].value;
