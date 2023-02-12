@@ -9,8 +9,8 @@ void compile()
 {
 	std::cout << "Start compile" << std::endl;
 
-	std::ofstream out;          // поток для записи
-	out.open("./out.asm"); // окрываем файл для записи
+	std::ofstream out;          
+	out.open("./out.asm"); 
 	if (out.is_open())
 	{
 		out << ";CREATED BY TURBOPRINTS\n\n";
@@ -55,16 +55,7 @@ void compile()
 	out << "\tMOV ax, data_segment\n\tMOV ds, ax\n\n";
 
 	OperationBlock *start = oelements.at(0);
-	OperationBlock *current_block = (OperationBlock*)start->BaseOutputConnector->OtherConnector->ParentObject;
-	Connector* current_connector;
-	while (true)
-	{
-		current_block->CompileBlock(out);
-		current_connector = current_block->BaseOutputConnector;
-		if (current_connector->OtherConnector == 0)
-			break;
-		current_block = (OperationBlock*)current_connector->OtherConnector->ParentObject;
-	}
+	compile_branch(start, out);
 
 	out << "\nEXIT:\n\tMOV ah, 4Ch\n\tINT 21h\n\n";
 

@@ -15,6 +15,7 @@ public:
 	bool IsMove;
 	SDL_Texture *TitleText;
 
+
 	Connector *BaseInputConnector;
 	Connector *BaseOutputConnector;
 

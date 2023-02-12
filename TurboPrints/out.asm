@@ -13,7 +13,7 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	ADD , 
+	ADD num, 6
 
 EXIT:
 	MOV ah, 4Ch
