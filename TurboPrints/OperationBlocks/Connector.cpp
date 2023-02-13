@@ -11,6 +11,12 @@ Connector::Connector(void* parent_object)
 void Connector::Handler(SDL_Event &e, Vector2 position)
 {
 	Position = position;
+
+	if(OtherConnectors.size() > 0)
+		IsConnected = true;
+	else
+		IsConnected = false;
+
 	if (e.type == SDL_MOUSEBUTTONDOWN && check_button(e, Position.x, Position.y, 16, 16) && e.button.button == SDL_BUTTON_LEFT)
 	{
 		if (parent == 0)
@@ -22,24 +28,29 @@ void Connector::Handler(SDL_Event &e, Vector2 position)
 		{
 			if (this != parent)
 			{
-				parent->IsConnected = true;
-				parent->OtherConnector = this;
-				OtherConnector = parent;
+				// сначала дисконектим (чтобы не было одинкового подключения)
+				UnConnect(parent);
+				parent->UnConnect(this);
+
+				// присоединяем
+				parent->OtherConnectors.push_back(this);
+				OtherConnectors.push_back(parent);
 				parent->IsParent = false;
 				parent = 0;
-				IsConnected = true;
 			}
 		}
 	}
 
-	if (parent != 0 && e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
+	if (parent == this && e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
 	{
 		if (parent->IsConnected)
 		{
-			parent->OtherConnector->IsConnected = false;
-			parent->OtherConnector->OtherConnector = 0;
-			parent->OtherConnector = 0;
-			parent->IsConnected = false;
+			for (int i = 0; i < OtherConnectors.size(); i++)
+			{
+				Connector* c = OtherConnectors.at(i);
+				UnConnect(c);
+			}
+			OtherConnectors.clear();
 		}
 		parent->IsParent = false;
 		parent = 0;
@@ -58,4 +69,16 @@ void Connector::Draw()
 	
 	SDL_RenderDrawRect(gRenderer, &outlineRect);
 	SDL_RenderFillRect(gRenderer, &outlineRect);
+}
+
+void Connector::UnConnect(Connector* other_connector)
+{
+	for (int i = 0; i < other_connector->OtherConnectors.size(); i++)
+	{
+		if (other_connector->OtherConnectors.at(i) == this)
+		{
+			other_connector->OtherConnectors.erase(other_connector->OtherConnectors.begin() + i);
+			break;
+		}
+	}
 }

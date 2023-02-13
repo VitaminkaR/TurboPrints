@@ -18,14 +18,14 @@ void create_opeartion_block(int id)
 
 void compile_branch(OperationBlock* block, std::ofstream &out)
 {
-	OperationBlock* current_block = (OperationBlock*)block->BaseOutputConnector->OtherConnector->ParentObject;
+	OperationBlock* current_block = (OperationBlock*)block->BaseOutputConnector->OtherConnectors.at(0)->ParentObject;
 	Connector* current_connector;
 	while (true)
 	{
 		current_block->CompileBlock(out);
 		current_connector = current_block->BaseOutputConnector;
-		if (current_connector->OtherConnector == 0)
+		if (current_connector->OtherConnectors.size() == 0)
 			break;
-		current_block = (OperationBlock*)current_connector->OtherConnector->ParentObject;
+		current_block = (OperationBlock*)current_connector->OtherConnectors.at(0)->ParentObject;
 	}
 }

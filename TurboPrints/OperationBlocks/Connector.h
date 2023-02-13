@@ -8,7 +8,7 @@ class Connector
 public:
 	Vector2 Position;
 	void *ParentObject;
-	Connector* OtherConnector;
+	std::vector<Connector*> OtherConnectors;
 	bool IsParent;
 	bool IsConnected;
 	
@@ -16,4 +16,7 @@ public:
 
 	void Handler(SDL_Event &e, Vector2 position);
 	void Draw();
+
+	// отключает данный коннектор от другого
+	void UnConnect(Connector *other_connector);
 };

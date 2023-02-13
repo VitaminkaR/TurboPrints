@@ -1,11 +1,10 @@
 ;CREATED BY TURBOPRINTS
 
 stack_segment SEGMENT STACK "stack"
-	DB  DUP(0)
+	DB 32 DUP(0)
 stack_segment ENDS
 
 data_segment SEGMENT
-	 DB 5
 data_segment ENDS
 
 code_segment SEGMENT
