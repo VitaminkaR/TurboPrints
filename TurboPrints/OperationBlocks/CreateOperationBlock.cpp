@@ -11,6 +11,9 @@ void create_opeartion_block(int id)
 	case 1:
 		b = new OperationBlockSub();
 		break;
+	case 2:
+		b = new OperationBlockIf();
+		break;
 	}
 	b->IsMove = true;
 	b->MoveOffset = {b->Size.x / 2, b->Size.y / 2};

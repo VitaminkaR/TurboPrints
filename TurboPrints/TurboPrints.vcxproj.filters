@@ -69,6 +69,9 @@
     <ClCompile Include="OperationBlocks\OperationBlockSub.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="OperationBlocks\OperationBlockIf.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="platform.h">
@@ -120,6 +123,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="OperationBlocks\OperationBlockSub.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationBlocks\OperationBlockIf.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

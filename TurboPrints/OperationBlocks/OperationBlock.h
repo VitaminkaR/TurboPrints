@@ -4,7 +4,7 @@
 #include "../InputBox.h"
 #include "../RenderText.h"
 
-const int TYPES_COUNT = 2;
+const int TYPES_COUNT = 3;
 
 class OperationBlock
 {

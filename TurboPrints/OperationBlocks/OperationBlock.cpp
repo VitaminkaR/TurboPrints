@@ -7,11 +7,15 @@ std::vector<OperationBlock*> oelements;
 std::string operation_types[TYPES_COUNT]
 {
 	"ADD",
-	"SUB"
+	"SUB",
+	"IF"
 };
 
 // true когда пользователь перетаскивает один из блоков
 bool once_move;
+
+// счетчик меток для if и cycles operation blocks
+int labels_count = 0;
 
 OperationBlock::OperationBlock()
 {
