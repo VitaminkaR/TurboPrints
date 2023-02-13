@@ -2,6 +2,8 @@
 
 extern SDL_Renderer* gRenderer;
 Connector *parent = 0;
+// при соединении становится истинным, что в следующем кадре удалит ссылку на родителя
+bool disable_parent = false;
 
 Connector::Connector(void* parent_object)
 {
@@ -36,9 +38,16 @@ void Connector::Handler(SDL_Event &e, Vector2 position)
 				parent->OtherConnectors.push_back(this);
 				OtherConnectors.push_back(parent);
 				parent->IsParent = false;
-				parent = 0;
+				disable_parent = true;
 			}
 		}
+	}
+
+	// отключение родителя
+	if (parent == this && disable_parent)
+	{
+		parent = 0;
+		disable_parent = false;
 	}
 
 	if (parent == this && e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_RIGHT)
@@ -53,7 +62,7 @@ void Connector::Handler(SDL_Event &e, Vector2 position)
 			OtherConnectors.clear();
 		}
 		parent->IsParent = false;
-		parent = 0;
+		disable_parent = true;
 	}
 }
 
