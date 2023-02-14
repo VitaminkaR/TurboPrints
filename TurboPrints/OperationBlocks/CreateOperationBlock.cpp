@@ -25,6 +25,8 @@ void compile_branch(OperationBlock* block, std::ofstream &out)
 	Connector* current_connector;
 	while (true)
 	{
+		if(current_block == 0)
+			break;
 		current_block->CompileBlock(out);
 		current_connector = current_block->BaseOutputConnector;
 		if (current_connector->OtherConnectors.size() == 0)
