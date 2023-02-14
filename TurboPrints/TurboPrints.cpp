@@ -40,6 +40,7 @@ int SDL_main(int argc, char* argv[])
 	ControlPanel::Init();
 
 	oelements.push_back(new OperationBlockBegin());
+	create_wire({400, 200}, {200, 100});
 
 	// главный цикл
 	while (!quit)
@@ -52,9 +53,6 @@ int SDL_main(int argc, char* argv[])
 			}
 
 			keyboard_handler(e);
-
-			// wires
-			wires_handle(e);
 
 			// Interface and workspaces
 			WindowPanel::Event_Handle(e);
@@ -83,9 +81,6 @@ int SDL_main(int argc, char* argv[])
 		{
 			DataWindowManager::Draw();
 		}
-
-		// wires
-		wires_draw();
 
 		SDL_RenderPresent(gRenderer);
 		SDL_Delay(FRAMES);

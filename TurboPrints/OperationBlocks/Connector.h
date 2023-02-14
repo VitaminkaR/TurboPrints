@@ -12,6 +12,7 @@ public:
 	std::vector<Connector*> OtherConnectors;
 	bool IsParent;
 	bool IsConnected;
+	Wire* ThisWire;
 	
 	Connector(void *parent_object);
 

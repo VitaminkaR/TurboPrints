@@ -8,6 +8,7 @@ bool disable_parent = false;
 Connector::Connector(void* parent_object)
 {
 	ParentObject = parent_object;
+	ThisWire = 0;
 }
 
 void Connector::Handler(SDL_Event &e, Vector2 position)
@@ -64,6 +65,19 @@ void Connector::Handler(SDL_Event &e, Vector2 position)
 		parent->IsParent = false;
 		disable_parent = true;
 	}
+
+	// провода
+	if (!IsConnected && ThisWire)
+	{
+		delete ThisWire;
+		ThisWire = 0;
+	}
+	if (!ThisWire && IsConnected)
+		ThisWire = create_wire(Position, OtherConnectors.at(0)->Position);
+	if (ThisWire && OtherConnectors.size() > 0)
+	{
+		ThisWire->UpdatePos(Position, OtherConnectors.at(0)->Position);
+	}
 }
 
 void Connector::Draw()
@@ -78,6 +92,10 @@ void Connector::Draw()
 	
 	SDL_RenderDrawRect(gRenderer, &outlineRect);
 	SDL_RenderFillRect(gRenderer, &outlineRect);
+
+	// провод
+	if (ThisWire)
+		ThisWire->Draw();
 }
 
 void Connector::UnConnect(Connector* other_connector)
