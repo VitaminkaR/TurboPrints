@@ -5,19 +5,36 @@ extern int labels_count;
 void OperationBlockIf::CompileBlock(std::ofstream& out)
 {
 	out << "\tMOV BX, " << FirstOperand->Text << "\n\tCMP BX, " << SecondOperand->Text << std::endl; 
+
+	// определ€ем есть ли ложна€ ветка
+	bool false_branch = true;
+	if(BaseOutputConnector->OtherConnectors.at(0)->OtherConnectors.size() == 2)
+		false_branch = false;
+
 	if (OperationOperand->Text == "=")
 	{
-		out << "\tje L_" << labels_count << "\n\tjmp L_" << labels_count + 1 << "\n\nL_" << labels_count << ":\n";
-		// компилируем истиную ветку
-		CompileIfBranch(out, TrueConnector);
-		out << "\tjmp L_" << labels_count + 2 << "\n";
-		// компилируем ложную ветку
-		out << "\nL_" << labels_count + 1 << ":\n";
-		OperationBlock *shared = CompileIfBranch(out, BaseOutputConnector);
-		out << "\nL_" << labels_count + 2 << ":\n";
-		// после компил€ции в указатель объекта стандартного выхода блока, помещаем объект с тем самым двойным подключением
-		BaseOutputConnector->OtherConnectors.at(0)->ParentObject = shared;
-		labels_count += 3;
+		if (false_branch) 
+		{
+			out << "\tje L_" << labels_count << "\n\tjmp L_" << labels_count + 1 << "\n\nL_" << labels_count << ":\n";
+			// компилируем истиную ветку
+			CompileIfBranch(out, TrueConnector);
+			out << "\tjmp L_" << labels_count + 2 << "\n";
+			// компилируем ложную ветку
+			out << "\nL_" << labels_count + 1 << ":\n";
+			OperationBlock* shared = CompileIfBranch(out, BaseOutputConnector);
+			out << "\nL_" << labels_count + 2 << ":\n";
+			// после компил€ции в указатель объекта стандартного выхода блока, помещаем объект с тем самым двойным подключением
+			BaseOutputConnector->OtherConnectors.at(0)->ParentObject = shared;
+			labels_count += 3;
+		}
+		else
+		{
+			out << "\tje L_" << labels_count << "\n\tjmp L_" << labels_count + 1 << "\n\nL_" << labels_count << ":\n";
+			// компилируем истиную ветку
+			CompileIfBranch(out, TrueConnector);
+			out << "\nL_" << labels_count + 1 << ":\n";
+			labels_count += 2;
+		}
 	}
 }
 

@@ -1,11 +1,10 @@
 ;CREATED BY TURBOPRINTS
 
 stack_segment SEGMENT STACK "stack"
-	DB  DUP(0)
+	DB 32 DUP(0)
 stack_segment ENDS
 
 data_segment SEGMENT
-	num DB 5
 data_segment ENDS
 
 code_segment SEGMENT
@@ -14,5 +13,20 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	MOV BX, num
-	CMP BX, 5
+	MOV BX, 
+	CMP BX, 
+	je L_0
+	jmp L_1
+
+L_0:
+	ADD , 
+
+L_1:
+	SUB , 
+
+EXIT:
+	MOV ah, 4Ch
+	INT 21h
+
+code_segment ENDS
+END begin
