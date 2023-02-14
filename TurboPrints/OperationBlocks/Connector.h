@@ -2,6 +2,7 @@
 
 #include "../platform.h"
 #include "../Button.h"
+#include "../Wire.h"
 
 class Connector
 {
@@ -11,6 +12,7 @@ public:
 	std::vector<Connector*> OtherConnectors;
 	bool IsParent;
 	bool IsConnected;
+	Wire* ConnectWire;
 	
 	Connector(void *parent_object);
 

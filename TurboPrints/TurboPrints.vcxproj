@@ -149,6 +149,7 @@
     <ClCompile Include="TurboPrints.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="WindowPanel.cpp" />
+    <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="platform.h" />
     <ClInclude Include="RenderText.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="Wire.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

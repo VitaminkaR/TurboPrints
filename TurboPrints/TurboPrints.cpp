@@ -6,6 +6,7 @@
 #include "DataWindowManager.h"
 #include "RenderText.h"
 #include "KeyboardHandler.h"
+#include "Wire.h"
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
@@ -52,6 +53,10 @@ int SDL_main(int argc, char* argv[])
 
 			keyboard_handler(e);
 
+			// wires
+			wires_handle(e);
+
+			// Interface and workspaces
 			WindowPanel::Event_Handle(e);
 			if (!WindowPanel::Get_Mode())
 			{
@@ -67,6 +72,7 @@ int SDL_main(int argc, char* argv[])
 		SDL_SetRenderDrawColor(gRenderer, 100, 100, 100, 0xFF);
 		SDL_RenderClear(gRenderer);
 
+		// Interface and workspaces
 		WindowPanel::Draw();
 		if (!WindowPanel::Get_Mode())
 		{
@@ -77,7 +83,9 @@ int SDL_main(int argc, char* argv[])
 		{
 			DataWindowManager::Draw();
 		}
-		
+
+		// wires
+		wires_draw();
 
 		SDL_RenderPresent(gRenderer);
 		SDL_Delay(FRAMES);

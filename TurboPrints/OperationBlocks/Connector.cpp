@@ -8,6 +8,7 @@ bool disable_parent = false;
 Connector::Connector(void* parent_object)
 {
 	ParentObject = parent_object;
+	ConnectWire = 0;
 }
 
 void Connector::Handler(SDL_Event &e, Vector2 position)
@@ -19,17 +20,28 @@ void Connector::Handler(SDL_Event &e, Vector2 position)
 	else
 		IsConnected = false;
 
+	if(ConnectWire != 0)
+	{
+		ConnectWire->Points.at(0) = { Position.x + 8, Position.y + 8 };
+		if(OtherConnectors.size() > 0)
+			ConnectWire->Points.at(ConnectWire->Points.size() - 1) = {OtherConnectors.at(0)->Position.x + 8, OtherConnectors.at(0)->Position.y + 8};
+	}
+
 	if (e.type == SDL_MOUSEBUTTONDOWN && check_button(e, Position.x, Position.y, 16, 16) && e.button.button == SDL_BUTTON_LEFT)
 	{
 		if (parent == 0)
 		{
 			parent = this;
 			IsParent = true;
+			ConnectWire = create_wire(); // добавляем провод
+			ConnectWire->CreatePoint(0, 0);
 		}
 		else
 		{
 			if (this != parent)
 			{
+				// завершаем присоединение провода
+				create_wire();
 				// сначала дисконектим (чтобы не было одинкового подключения)
 				UnConnect(parent);
 				parent->UnConnect(this);
