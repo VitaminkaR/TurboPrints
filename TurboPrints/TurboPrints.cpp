@@ -6,7 +6,7 @@
 #include "DataWindowManager.h"
 #include "RenderText.h"
 #include "KeyboardHandler.h"
-#include "Wire.h"
+#include "Camera.h"
 
 const int WIDTH = 1280;
 const int HEIGHT = 720;
@@ -65,6 +65,9 @@ int SDL_main(int argc, char* argv[])
 			{
 				DataWindowManager::Event_Handle(e);
 			}
+
+			// camera
+			camera_handle(e);
 		}
 
 		SDL_SetRenderDrawColor(gRenderer, 100, 100, 100, 0xFF);

@@ -3,6 +3,7 @@
 #include "Connector.h"
 #include "../InputBox.h"
 #include "../RenderText.h"
+#include "../Camera.h"
 
 const int TYPES_COUNT = 3;
 
@@ -14,6 +15,7 @@ public:
 	Vector2 Size;
 	bool IsMove;
 	SDL_Texture *TitleText;
+	Vector2 *CamPos;
 
 
 	Connector *BaseInputConnector;

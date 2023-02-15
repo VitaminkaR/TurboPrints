@@ -40,13 +40,13 @@ void OperationBlockIf::CompileBlock(std::ofstream& out)
 
 void OperationBlockIf::Handler(SDL_Event& e)
 {
-	FirstOperand->Position = { Position.x + 16, Position.y + Size.y - 64 };
-	SecondOperand->Position = { Position.x - 80 + Size.x, Position.y + Size.y - 64 };
-	OperationOperand->Position = { Position.x - 40 + Size.x / 2, Position.y + Size.y - 64 };
+	FirstOperand->Position = { Position.x + 16 - CamPos->x, Position.y + Size.y - 64 - CamPos->y };
+	SecondOperand->Position = { Position.x - 80 + Size.x - CamPos->x, Position.y + Size.y - 64 - CamPos->y };
+	OperationOperand->Position = { Position.x - 40 + Size.x / 2 - CamPos->x, Position.y + Size.y - 64 - CamPos->y };
 	FirstOperand->Handler(e);
 	SecondOperand->Handler(e);
 	OperationOperand->Handler(e);
-	TrueConnector->Handler(e, { Position.x + Size.x - 24, Position.y + Size.y - 8 });
+	TrueConnector->Handler(e, { Position.x + Size.x - 24 - CamPos->x, Position.y + Size.y - 8 - CamPos->y });
 }
 
 void OperationBlockIf::Draw()

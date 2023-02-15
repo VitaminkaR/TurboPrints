@@ -1,5 +1,7 @@
 #include "CreateOperationBlock.h"
 
+extern Vector2 camera_position;
+
 void create_opeartion_block(int id)
 {
 	OperationBlock* b = 0;
@@ -16,16 +18,16 @@ void create_opeartion_block(int id)
 		break;
 	}
 	b->IsMove = true;
-	b->MoveOffset = {b->Size.x / 2, b->Size.y / 2};
+	b->MoveOffset = { b->Size.x / 2 - camera_position.x, b->Size.y / 2 - camera_position.y };
 }
 
-void compile_branch(OperationBlock* block, std::ofstream &out)
+void compile_branch(OperationBlock* block, std::ofstream& out)
 {
 	OperationBlock* current_block = (OperationBlock*)block->BaseOutputConnector->OtherConnectors.at(0)->ParentObject;
 	Connector* current_connector;
 	while (true)
 	{
-		if(current_block == 0)
+		if (current_block == 0)
 			break;
 		current_block->CompileBlock(out);
 		current_connector = current_block->BaseOutputConnector;

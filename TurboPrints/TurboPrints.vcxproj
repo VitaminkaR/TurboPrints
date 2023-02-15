@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Compile.cpp" />
     <ClCompile Include="OperationBlocks\Connector.cpp" />
     <ClCompile Include="Content.cpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Compile.h" />
     <ClInclude Include="OperationBlocks\Connector.h" />
     <ClInclude Include="Content.h" />

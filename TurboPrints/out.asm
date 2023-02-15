@@ -13,16 +13,7 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	MOV BX, 
-	CMP BX, 
-	je L_0
-	jmp L_1
-
-L_0:
 	ADD , 
-
-L_1:
-	SUB , 
 
 EXIT:
 	MOV ah, 4Ch
