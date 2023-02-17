@@ -16,6 +16,12 @@ void create_opeartion_block(int id)
 	case 2:
 		b = new OperationBlockMul();
 		break;
+	case 3:
+		b = new OperationBlockDiv();
+		break;
+	case 4:
+		b = new OperationBlockMod();
+		break;
 	case 5:
 		b = new OperationBlockIf();
 		break;

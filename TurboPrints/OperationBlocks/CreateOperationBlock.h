@@ -7,6 +7,8 @@
 #include "OperationBlockIf.h"
 #include "OperationBlockFor.h"
 #include "OperationBlockMul.h"
+#include "OperationBlockDiv.h"
+#include "OperationBlockMod.h"
 
 void create_opeartion_block(int id);
 void compile_branch(OperationBlock* block, std::ofstream &out);

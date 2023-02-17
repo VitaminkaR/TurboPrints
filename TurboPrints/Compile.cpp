@@ -30,10 +30,10 @@ void compile()
 		switch (vars[i].var_type)
 		{
 		case INT:
-			out << "DD " << (vars[i].value == "") ? "?" : vars[i].value;
+			out << "DD " << ((vars[i].value == "") ? "?" : vars[i].value);
 			break;
 		case SHORT:
-			out << "DW " << (vars[i].value == "") ? "?" : vars[i].value;
+			out << "DW " << ((vars[i].value == "") ? "?" : vars[i].value);
 			break;
 		case BYTE:
 			out << "DB " << ((vars[i].value == "") ? "?" : vars[i].value);
