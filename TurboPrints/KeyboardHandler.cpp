@@ -46,6 +46,10 @@ bool get_keyboard_char(char &c)
 			c = '(';
 		else if (currentScanCode == SDL_SCANCODE_MINUS)
 			c = '_';
+		else if (currentScanCode == SDLK_GREATER)
+			c = '>';
+		else if (currentScanCode == SDLK_LESS)
+			c = '<';
 	}
 		
 	return true;
