@@ -14,7 +14,13 @@ void create_opeartion_block(int id)
 		b = new OperationBlockSub();
 		break;
 	case 2:
+		b = new OperationBlockMul();
+		break;
+	case 5:
 		b = new OperationBlockIf();
+		break;
+	case 6:
+		b = new OperationBlockFor();
 		break;
 	}
 	b->IsMove = true;

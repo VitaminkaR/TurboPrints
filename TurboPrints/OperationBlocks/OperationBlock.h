@@ -5,7 +5,7 @@
 #include "../RenderText.h"
 #include "../Camera.h"
 
-const int TYPES_COUNT = 3;
+const int TYPES_COUNT = 7;
 
 class OperationBlock
 {

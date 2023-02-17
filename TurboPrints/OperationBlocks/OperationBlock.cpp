@@ -8,7 +8,11 @@ std::string operation_types[TYPES_COUNT]
 {
 	"ADD",
 	"SUB",
-	"IF"
+	"MUL",
+	"DIV",
+	"MOD",
+	"IF",
+	"FOR"
 };
 
 extern Vector2 camera_position;

@@ -144,7 +144,9 @@
     <ClCompile Include="OperationBlocks\OperationBlock.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockAdd.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockBegin.cpp" />
+    <ClCompile Include="OperationBlocks\OperationBlockFor.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockIf.cpp" />
+    <ClCompile Include="OperationBlocks\OperationBlockMul.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockSub.cpp" />
     <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="TurboPrints.cpp" />
@@ -167,7 +169,9 @@
     <ClInclude Include="OperationBlocks\OperationBlock.h" />
     <ClInclude Include="OperationBlocks\OperationBlockAdd.h" />
     <ClInclude Include="OperationBlocks\OperationBlockBegin.h" />
+    <ClInclude Include="OperationBlocks\OperationBlockFor.h" />
     <ClInclude Include="OperationBlocks\OperationBlockIf.h" />
+    <ClInclude Include="OperationBlocks\OperationBlockMul.h" />
     <ClInclude Include="OperationBlocks\OperationBlockSub.h" />
     <ClInclude Include="platform.h" />
     <ClInclude Include="RenderText.h" />
