@@ -46,9 +46,9 @@ bool get_keyboard_char(char &c)
 			c = '(';
 		else if (currentScanCode == SDL_SCANCODE_MINUS)
 			c = '_';
-		else if (currentScanCode == SDLK_GREATER)
+		else if (currentScanCode == SDL_SCANCODE_PERIOD)
 			c = '>';
-		else if (currentScanCode == SDLK_LESS)
+		else if (currentScanCode == SDL_SCANCODE_COMMA)
 			c = '<';
 	}
 		
