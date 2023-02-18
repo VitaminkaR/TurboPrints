@@ -26,15 +26,17 @@ int labels_count = 0;
 OperationBlock::OperationBlock()
 {
 	Position = { 0, 0 };
-	Size = {256, 128};
+	Size = { 256, 128 };
 	oelements.push_back(this);
 	CamPos = &camera_position;
 
-	BaseInputConnector = new Connector((OperationBlock*)this);
-	BaseOutputConnector = new Connector((OperationBlock*)this);
+	Connectors = new std::vector<Connector*>();
+	InputsOperands = new std::vector<InputBox*>();
+	Connectors->push_back(new Connector((OperationBlock*)this));
+	Connectors->push_back(new Connector((OperationBlock*)this));
 }
 
-void OperationBlock::BaseHandler(SDL_Event& e)
+void OperationBlock::Handler(SDL_Event& e)
 {
 	if (!once_move && check_button(e, Position.x - camera_position.x, Position.y - camera_position.y, Size.x, Size.y) && e.button.button == SDL_BUTTON_LEFT)
 	{
@@ -49,16 +51,24 @@ void OperationBlock::BaseHandler(SDL_Event& e)
 	}
 	if (IsMove)
 	{
-		Position = {e.button.x - MoveOffset.x, e.button.y - MoveOffset.y};
+		Position = { e.button.x - MoveOffset.x, e.button.y - MoveOffset.y };
+		if(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_DELETE)
+			Delete();
 	}
 
-	BaseInputConnector->Handler(e, {Position.x + Size.x / 2 - 8 - CamPos->x, Position.y - 8 - CamPos->y });
-	BaseOutputConnector->Handler(e, { Position.x + Size.x / 2 - 8 - CamPos->x, Position.y  + Size.y - 8 - CamPos->y });
+	Connectors->at(0)->Handler(e, { Position.x + Size.x / 2 - 8 - CamPos->x, Position.y - 8 - CamPos->y });
+	Connectors->at(1)->Handler(e, { Position.x + Size.x / 2 - 8 - CamPos->x, Position.y + Size.y - 8 - CamPos->y });
+	if (Connectors->size() == 3)
+		Connectors->at(2)->Handler(e, { Position.x + Size.x - 16 - CamPos->x, Position.y + Size.y - 8 - CamPos->y });
 
-	Handler(e);
+	for (int i = 0; i < InputsOperands->size(); i++)
+	{
+		InputsOperands->at(i)->Position = { Position.x + 16 - CamPos->x + 64 * (i % 2), Position.y + Size.y - 64 - CamPos->y + 32 * (i / 2) };
+		InputsOperands->at(i)->Handler(e);
+	}
 }
 
-void OperationBlock::BaseDraw()
+void OperationBlock::Draw()
 {
 	SDL_Rect outlineRect = { Position.x - CamPos->x, Position.y - CamPos->y, Size.x, Size.y };
 	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -66,9 +76,36 @@ void OperationBlock::BaseDraw()
 	SDL_RenderFillRect(gRenderer, &outlineRect);
 	draw_text(Position.x + 8 - CamPos->x, Position.y + 8 - CamPos->y, TitleText, 0, 0, 0);
 
-	BaseInputConnector->Draw();
-	BaseOutputConnector->Draw();
-
-	Draw();
+	for (int i = 0; i < Connectors->size(); i++)
+	{
+		Connectors->at(i)->Draw();
+	}
+	for (int i = 0; i < InputsOperands->size(); i++)
+	{
+		InputsOperands->at(i)->Draw();
+	}
 }
 
+void OperationBlock::Delete()
+{
+	for (int i = 0; i < Connectors->size(); i++)
+	{
+		delete Connectors->at(i);
+	}
+	delete Connectors;
+	for (int i = 0; i < InputsOperands->size(); i++)
+	{
+		delete InputsOperands->at(i);
+	}
+	delete InputsOperands;
+	SDL_DestroyTexture(TitleText);
+	for (int i = 0; i < oelements.size(); i++)
+	{
+		if (oelements.at(i) == this)
+		{
+			oelements.erase(oelements.begin() + i);
+			break;
+		}
+	}
+	delete this;
+}

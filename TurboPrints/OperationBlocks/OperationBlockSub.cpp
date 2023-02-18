@@ -2,19 +2,5 @@
 
 void OperationBlockSub::CompileBlock(std::ofstream& out)
 {
-	out << "\tSUB " << FirstOperand->Text << ", " << SecondOperand->Text << std::endl;
-}
-
-void OperationBlockSub::Handler(SDL_Event& e)
-{
-	FirstOperand->Position = { Position.x + 16 - CamPos->x, Position.y + Size.y - 64 - CamPos->y };
-	SecondOperand->Position = { Position.x - 80 + Size.x - CamPos->x, Position.y + Size.y - 64 - CamPos->y };
-	FirstOperand->Handler(e);
-	SecondOperand->Handler(e);
-}
-
-void OperationBlockSub::Draw()
-{
-	FirstOperand->Draw();
-	SecondOperand->Draw();
+	out << "\tSUB " << InputsOperands->at(0)->Text << ", " << InputsOperands->at(1)->Text << std::endl;
 }

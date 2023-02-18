@@ -45,7 +45,7 @@ void ControlPanel::Draw()
 	}
 	for (int i = 0; i < oelements.size(); i++)
 	{
-		oelements.at(i)->BaseDraw();
+		oelements.at(i)->Draw();
 	}
 }
 
@@ -100,6 +100,6 @@ void ControlPanel::Event_Handle(SDL_Event& e)
 
 	for (int i = 0; i < oelements.size(); i++)
 	{
-		oelements.at(i)->BaseHandler(e);
+		oelements.at(i)->Handler(e);
 	}
 }

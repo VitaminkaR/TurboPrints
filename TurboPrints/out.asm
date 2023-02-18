@@ -13,10 +13,14 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	MOV BX, 
-	CMP BX, 
-	jbe L_0
-	jmp L_1
+	MOV AX, num
+	MOV BX, 3
+	IMUL BX
+	MOV num, AX
 
-L_0:
-	ADD , 
+EXIT:
+	MOV ah, 4Ch
+	INT 21h
+
+code_segment ENDS
+END begin

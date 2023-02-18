@@ -17,16 +17,14 @@ public:
 	SDL_Texture *TitleText;
 	Vector2 *CamPos;
 
-
-	Connector *BaseInputConnector;
-	Connector *BaseOutputConnector;
+	std::vector<Connector*> *Connectors;
+	std::vector<InputBox*> *InputsOperands;
 
 	OperationBlock();
-	void BaseHandler(SDL_Event &e);
-	void BaseDraw();
+	void Handler(SDL_Event &e);
+	void Draw();
+	void Delete();
 	virtual void CompileBlock(std::ofstream &out) = 0;
-	virtual void Handler(SDL_Event &e) = 0;
-	virtual void Draw() = 0;
 };
 
 void create_opeartion_block(int id);
