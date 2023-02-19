@@ -52,8 +52,12 @@ void OperationBlock::Handler(SDL_Event& e)
 	if (IsMove)
 	{
 		Position = { e.button.x - MoveOffset.x, e.button.y - MoveOffset.y };
-		if(e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_DELETE)
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_DELETE)
+		{
 			Delete();
+			once_move = false;
+			return;
+		}
 	}
 
 	Connectors->at(0)->Handler(e, { Position.x + Size.x / 2 - 8 - CamPos->x, Position.y - 8 - CamPos->y });
@@ -90,6 +94,16 @@ void OperationBlock::Delete()
 {
 	for (int i = 0; i < Connectors->size(); i++)
 	{
+		Connector *current_connector = Connectors->at(i);
+		for (int j = 0; j < current_connector->OtherConnectors.size(); j++)
+		{
+			Connector *other_connector = current_connector->OtherConnectors.at(j);
+			for (int k = 0; k < other_connector->OtherConnectors.size(); k++)
+			{
+				if(other_connector->OtherConnectors.at(k) == current_connector)
+					other_connector->OtherConnectors.erase(other_connector->OtherConnectors.begin() + k);
+			}
+		}
 		delete Connectors->at(i);
 	}
 	delete Connectors;

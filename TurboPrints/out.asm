@@ -13,10 +13,7 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	MOV AX, num
-	MOV BX, 3
-	IMUL BX
-	MOV num, AX
+	ADD n, n
 
 EXIT:
 	MOV ah, 4Ch
