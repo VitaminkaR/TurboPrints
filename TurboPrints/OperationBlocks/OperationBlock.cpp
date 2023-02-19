@@ -38,6 +38,9 @@ OperationBlock::OperationBlock()
 
 void OperationBlock::Handler(SDL_Event& e)
 {
+	if(!camera_on_screen(Position, Size))
+		return;
+
 	if (!once_move && check_button(e, Position.x - camera_position.x, Position.y - camera_position.y, Size.x, Size.y) && e.button.button == SDL_BUTTON_LEFT)
 	{
 		once_move = true;
@@ -74,6 +77,9 @@ void OperationBlock::Handler(SDL_Event& e)
 
 void OperationBlock::Draw()
 {
+	if (!camera_on_screen(Position, Size))
+		return;
+
 	SDL_Rect outlineRect = { Position.x - CamPos->x, Position.y - CamPos->y, Size.x, Size.y };
 	SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderDrawRect(gRenderer, &outlineRect);

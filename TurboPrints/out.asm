@@ -5,6 +5,8 @@ stack_segment SEGMENT STACK "stack"
 stack_segment ENDS
 
 data_segment SEGMENT
+	num DB 0
+	i DB 0
 data_segment ENDS
 
 code_segment SEGMENT
@@ -13,7 +15,16 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	ADD n, n
+L_0:
+	ADD num, 1
+	INC 10
+	MOV BX, i
+	CMP BX, 10
+	JE L_1
+	JMP L_0
+
+L_1:
+	SUB i, 10
 
 EXIT:
 	MOV ah, 4Ch

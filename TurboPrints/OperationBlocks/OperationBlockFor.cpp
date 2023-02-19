@@ -28,7 +28,7 @@ void OperationBlockFor::CompileBlock(std::ofstream& out)
 	// генерирует условный цикл (дойти до)
 	else
 	{
-		out << "\tINC " << InputsOperands->at(1)->Text << "\n";
+		out << "\tINC " << InputsOperands->at(0)->Text << "\n";
 		out << "\tMOV BX, " << InputsOperands->at(0)->Text << "\n";
 		out << "\tCMP BX, " << iters << "\n";
 		out << "\tJE L_" << labels_count + 1 << "\n";
