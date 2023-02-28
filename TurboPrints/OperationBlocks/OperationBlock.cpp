@@ -4,16 +4,6 @@ extern SDL_Texture* textures[];
 extern SDL_Renderer* gRenderer;
 
 std::vector<OperationBlock*> oelements;
-std::string operation_types[TYPES_COUNT]
-{
-	"ADD",
-	"SUB",
-	"MUL",
-	"DIV",
-	"MOD",
-	"IF",
-	"FOR"
-};
 
 extern Vector2 camera_position;
 

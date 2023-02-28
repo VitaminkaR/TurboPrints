@@ -2,6 +2,19 @@
 
 extern Vector2 camera_position;
 
+std::string operation_types[TYPES_COUNT]
+{
+	"ADD",
+	"SUB",
+	"MUL",
+	"DIV",
+	"MOD",
+	"IF",
+	"FOR",
+	"WRITE",
+	"READ"
+};
+
 void create_opeartion_block(int id)
 {
 	OperationBlock* b = 0;
@@ -27,6 +40,12 @@ void create_opeartion_block(int id)
 		break;
 	case 6:
 		b = new OperationBlockFor();
+		break;
+	case 7:
+		b = new OperationBlockWrite();
+		break;
+	case 8:
+		b = new OperationBlockRead();
 		break;
 	}
 	b->IsMove = true;
