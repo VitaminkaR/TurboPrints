@@ -5,7 +5,7 @@ stack_segment SEGMENT STACK "stack"
 stack_segment ENDS
 
 data_segment SEGMENT
-	string DB 'hello$'
+	string DB 'Hello World!$'
 data_segment ENDS
 
 function_segment SEGMENT
@@ -61,12 +61,6 @@ begin:
 	MOV ax, data_segment
 	MOV ds, ax
 
-	PUSH DX
-	LEA DX, string
-	CALL write_func
-	POP DX
-
-	CALL newline_func
 	PUSH DX
 	LEA DX, string
 	CALL write_func

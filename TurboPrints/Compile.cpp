@@ -26,8 +26,10 @@ void compile()
 	out << "data_segment SEGMENT\n";
 	for (int i = 0; i < vars.size(); i++)
 	{
-		out << '\t' << vars[i].name << " ";
-		switch (vars[i].var_type)
+		std::string base = vars[i].name;
+		base.erase(base.begin());
+		out << '\t' << base << " ";
+		switch (int(vars[i].name[0]))
 		{
 		case INT:
 			out << "DD " << ((vars[i].value == "") ? "?" : vars[i].value);

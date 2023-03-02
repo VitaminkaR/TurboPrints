@@ -17,7 +17,6 @@ enum VarType
 
 struct Var
 {
-	VarType var_type;
 	std::string value;
 	std::string name;
 	InputBox* inputs[3];

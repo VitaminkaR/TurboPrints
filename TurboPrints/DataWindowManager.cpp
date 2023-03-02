@@ -86,9 +86,8 @@ void DataWindowManager::Event_Handle(SDL_Event& e)
 
 	if (id_edit_var != -1)
 	{
-		vars.at(id_edit_var).name = vars.at(id_edit_var).inputs[0]->Handler(e);
 		std::string str = vars.at(id_edit_var).inputs[1]->Handler(e);
-		vars.at(id_edit_var).var_type = get_vartype_string(str);
+		vars.at(id_edit_var).name = (char)(get_vartype_string(str)) + vars.at(id_edit_var).inputs[0]->Handler(e);
 		vars.at(id_edit_var).value = vars.at(id_edit_var).inputs[2]->Handler(e);
 	}
 
@@ -101,7 +100,6 @@ void DataWindowManager::AddVar()
 	Var v;
 	v.name = "VARNAME";
 	v.value = "?";
-	v.var_type = BYTE;
 	v.inputs[0] = new InputBox(0, 0, 512, 32, "VARNAME", 225, 0, 0);
 	v.inputs[1] = new InputBox(0, 0, 228, 32, "BYTE", 225, 225, 0);
 	v.inputs[2] = new InputBox(0, 0, 540, 32, "?", 0, 225, 0);
