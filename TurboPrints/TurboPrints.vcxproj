@@ -150,6 +150,7 @@
     <ClCompile Include="OperationBlocks\OperationBlockIf.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockMod.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockMul.cpp" />
+    <ClCompile Include="OperationBlocks\OperationBlockNewLine.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockRead.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockSub.cpp" />
     <ClCompile Include="OperationBlocks\OperationBlockWrite.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="OperationBlocks\OperationBlockIf.h" />
     <ClInclude Include="OperationBlocks\OperationBlockMod.h" />
     <ClInclude Include="OperationBlocks\OperationBlockMul.h" />
+    <ClInclude Include="OperationBlocks\OperationBlockNewLine.h" />
     <ClInclude Include="OperationBlocks\OperationBlockRead.h" />
     <ClInclude Include="OperationBlocks\OperationBlockSub.h" />
     <ClInclude Include="OperationBlocks\OperationBlockWrite.h" />

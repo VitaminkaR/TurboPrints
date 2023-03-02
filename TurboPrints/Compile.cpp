@@ -8,7 +8,7 @@ extern std::vector<OperationBlock*> oelements;
 void compile()
 {
 	std::cout << "Start compile" << std::endl;
-
+	
 	std::ofstream out;
 	out.open("./out.asm");
 	if (out.is_open())
@@ -80,6 +80,20 @@ void compile()
 		<< "\t\tPOP AX\n"
 		<< "\t\tRET\n"
 		<< "\tread_func ENDP\n\n"
+		// функци€ перехода на новую строку
+		<< "\tnewline_func PROC FAR\n"
+		<< "\t\tPUSH AX\n"
+		<< "\t\tPUSH DX\n"
+		<< "\t\tMOV DL, 10\n"
+		<< "\t\tMOV AH, 02H\n"
+		<< "\t\tINT 21H\n"
+		<< "\t\tMOV DL, 13\n"
+		<< "\t\tMOV AH, 02H\n"
+		<< "\t\tINT 21H\n"
+		<< "\t\tPOP DX\n"
+		<< "\t\tPOP AX\n"
+		<< "\t\tRET\n"
+		<< "\tnewline_func ENDP\n\n"
 		<< "function_segment ENDS\n\n";
 	//////////////////////////
 	// компил€ци€ кода

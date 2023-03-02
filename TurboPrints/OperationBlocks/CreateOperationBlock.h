@@ -11,8 +11,9 @@
 #include "OperationBlockMod.h"
 #include "OperationBlockWrite.h"
 #include "OperationBlockRead.h"
+#include "OperationBlockNewLine.h"
 
-const int TYPES_COUNT = 9;
+const int TYPES_COUNT = 10;
 
 void create_opeartion_block(int id);
 void compile_branch(OperationBlock* block, std::ofstream &out);

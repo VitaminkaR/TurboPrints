@@ -12,7 +12,8 @@ std::string operation_types[TYPES_COUNT]
 	"IF",
 	"FOR",
 	"WRITE",
-	"READ"
+	"READ",
+	"NEW LINE"
 };
 
 void create_opeartion_block(int id)
@@ -46,6 +47,9 @@ void create_opeartion_block(int id)
 		break;
 	case 8:
 		b = new OperationBlockRead();
+		break;
+	case 9:
+		b = new OperationBlockNewLine();
 		break;
 	}
 	b->IsMove = true;
